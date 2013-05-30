@@ -1,0 +1,13 @@
+#!/bin/bash
+# 00 setup.auto
+SETUP() {
+	if [ ! -d $storeDIR ]; then
+		mkdir -p $storeDIR/database $storeDIR/sources
+		touch $storeDIR/Config.d0
+		touch $storeDIR/Installed.d0
+	fi
+}
+
+triggerHTML() { #This will ONLY trigger with --html switch!!!
+	HTML=true
+}

@@ -1,0 +1,15 @@
+#!/bin/bash
+# 07 config loader.auto
+if [ -f $MAIN/d0-config.d0 ]; then
+	. $MAIN/d0-config.d0
+#	log ON_D0
+elif [ -f $HOME/Library/Drag0n/Config.d0 ]; then
+	. $HOME/Library/Drag0n/Config.d0
+#	log ON_HOMELIB
+elif [ -f /Library/Drag9n/Config.d0 ]; then
+	/Library/Drag9n/Config.d0
+#	log ON_SYSLIB
+elif [ -f /d0/Config.d0 ]; then
+	. /d0/Config.d0
+#	log ON_ROOT
+fi

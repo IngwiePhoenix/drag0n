@@ -1,0 +1,57 @@
+#!/bin/bash
+########################
+# Drag0n               #
+#    By Ingwie Phoenix #
+########################
+DevVersion="0.1-0.2-0.0.17 DEV"
+VERSION="0.1"
+
+### Loading.
+if [ -d ../lib ]; then
+	for count in $(ls -1 ../lib); do
+		source "../lib/$count"
+	done
+elif [ -d ./lib ]; then
+	for count in $(ls -1 ./lib); do
+		source "./lib/$count"
+	done
+fi
+
+log "Started Drag0n."
+SETUP
+log "Ran SETUP."
+
+PROGNAME="d0"
+#SHORTPOTS="P:Z:D:b:B:uri:k:R:V"
+#LONGOPTS1="check-d0p: check-zip: check-dir: build-d0p: make-d0p: update refresh instal: kill: parthsetup tmp-parthsetup: dir-pathsetup: tmp-dir-pathsetup: reconfigure"
+#LONGOPTS2="exec-fnc: html version www credits"
+#LONGOPTS="${LONGOPTS1},${LONGOPTS2}"
+#TEMP=`getopt -o "$SHORTOPTS" --longoptions "$LONGOPTS" "$@"`
+#eval set -- $TEMP
+#[ $# -eq 0 ] && help
+for i; do
+	case $1 in
+		-P|--check-d0p) check-d0p "$2"; shift;;
+#		-Z|--check-zip) check-zip "$2"; shift;;
+		-D|--check-dir) check-dir "$2"; shift;;
+		
+#		-b|--build-d0p)
+#		-B|--make-d0p)
+#		
+#		-u|--update)
+#		-r|--refresh)
+#		-i|--install)
+#		-k|--kill)
+#		
+		--exec-fnc) shift; eval "$*"; shift 2;;
+		--html) triggerHTML; log "Triggered HTML."; shift;;
+#		-R|--reconfigure)
+		-V|--version) 
+			if [ $HTML != true ]; then 
+				echo -e "Initial Version: $DevVersion\nOffical Version: $VERSION";
+			else 
+				echo "<p>Initial Version: $DevVersion<br>Offical Version: $VERSION</p>";
+			fi; shift;;
+		--help) help; exit 0;;
+	esac
+done

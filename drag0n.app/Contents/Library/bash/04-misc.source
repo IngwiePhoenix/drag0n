@@ -1,0 +1,106 @@
+#!/bin/bash
+# 06 misc.source
+
+help() { cat <<EOF
+Drag0n 0.1 by Ingwie Phoenix
+Drag0n GUI 0.1 by Ingwie Phoenix
+The used theme is from Xavi Esteve (http://xaviesteve.com/2899/ipad-iphone-mobile-html-css-template-for-web-apps/). Version: 1.0
+The GUI is based on appJS (http://appjs.org) which is a module of node (http://nodejs.org). AppJS: 0.0.17 and node.js: 0.8.4
+
+Usage: d0 [Options...] [Target...]
+Options:
+	-P|--check-d0p      Verify and check a .d0p file at [Target...]
+	-Z|--check-zip      Verify and check a .zip file at [Target...] if it is drag0n-ready.
+	-D|--check-dir      verify a directionary at [Target...]
+	
+	-b|--build-d0p      Create a drag0n-structured folder at [Target...]
+	-B|--make-d0p       Create a .d0p package off [Target...]
+	
+	-u|--update         Update the programm.
+	-r|--refresh        Refresh the sources
+	-i|--install        Install [Target...] (ex. d0.compilers)
+	-k|--kill           Deinstall [Target...] (ex. d0.compilers)
+	
+	--pathsetup         Update .profile or .bash_profile to use binaries distributed trough the drag0n package or installed packages.
+                        This option will append the new paths at the beginning of the string.
+	--tmp-pathsetup     Temporaryly add the drag0n paths (good for testing purposes)
+	--dir-pathsetup     Add [Target...] directionary inside the drag0n structure to the path.
+	--tmp-dir-pathsetup Same as above, just temporary.
+	
+	-R|--reconfigure    Reconfigure drag0n.
+
+	--html              Output is HTML-ready.
+	-v|--version        Outputs the complete version string.
+	--www               Go to the drag0n website.
+	--credits           Detailed credits.
+EOF
+}
+
+credits() { cat <<EOF
+This programm is freeware, if you recived it trough payment, SUE THEM - you got scammed!
+Drag0n was inspired by APT/DPKG, and the Cydia Store. It uses the following programms:
+
+	appJS          Displaying the GUI and crossing it over with the bash script(s).
+	node.js        Interpreting JavaScript in a terminal environment.
+	CocoaDialog    Displaying process bars and other dialog boxes.
+
+For more info, visit http://drag0n.tk or call this programm with the --www flag!
+
+Copyright 2012 Kevin Ingwersen, alias Ingwie Phoenix (ingwie2000@gmail.com)
+EOF
+}
+
+usePHP() { $phpBIN/$1; }
+version() { echo $VERSION; }
+tmp_pathsetup() { $PATH=$dBIN:$phpBIN:$PATH; }
+tmp_dir_pathsetup() { $PATH=$MAIN/inst/$1:$PATH; }
+
+getProfileFile() {
+	if [ -f $HOME/.profile ]; then
+		PRILEFILE=$HOME/.profile
+	elif [ -f $HOME/.bash_profile ]; then
+		PRILEFILE=$HOME/.bash_profile
+	fi
+}
+
+dir_pathsetup() {
+	getProfileFile
+	if grep "#Drag0n" $PROFILEFILE >/dev/null; then
+		return TRUE
+	else
+		echo -e "#Drag0n\n\$PATH=$1:$PATH"
+		return TRUE
+	fi
+}
+
+pathsetup() {
+	getProfileFile
+	if grep "#Drag0n" $PROFILEFILE; then
+		return TRUE
+	else
+		echo -e "#Drag0n\n\$PATH=$dBIN:$phpBIN:$PATH"
+		return TRUE
+	fi
+}
+
+test_d0p() {
+	TLIST=$(drplist $1)
+	PROC=0
+	for pt in "DRAG0N info.d0"
+		do
+			if echo $TLIST | grep $pt >/dev/null; then
+				$PROC=$PROC+50
+			fi
+		done
+}
+
+test_dir() {
+	if [ -f $1/DRAG0N/info.d0 ]; then
+		return TRUE
+	fi
+}
+
+killTMP() {
+	rm -Rfd $tmpDIR
+	mkdir -p $tmpDIR
+}

@@ -1,0 +1,70 @@
+# Setup the vars and structure.
+
+# Structure:
+# | /Drag0n <- Main folder
+root="./Drag0n"
+
+# |_ .upgrade
+upgraded="$root/.upgrade"
+
+# |_ inf <- information from sources
+# ||_ screen <- display informations
+# ||_ pkg <- package lists
+# ||_ table.d0 <- Sourcename + desc
+# ||_ inst <- installation folder. stores package data.
+# ||_ src.d0.d <- contains source-list-data
+# |||_ drn.d0s <- default source
+infd="$root/inf"
+screend="$infd/screen"
+pkgd="$infd/pkg"
+instd="$inf/inst"
+table="$infd/table.d0"
+srcd="$infd/src.d0.d"
+
+# |_ user <- user-stuff
+# ||_ sources_$USER <- user-sources
+# |||_ uploadable <- uploadable sources.
+# |||_ sources.conf.d <- contains source-configurations
+usr="$root/user"
+usr_sourced="$usr/sources_$USER"
+usr_s_upload="$usr_sourced/uploadable"
+usr_s_confd="$usr_sourced/sources.conf.d"
+
+# |_ env <- OPTIMAL: safely installs the needed files, and links their result to the real folders.
+# ||_ etc
+# ||_ bin
+# ||_ var
+# ||_ lib
+
+# |_ d0.conf <- informations about d0 and some settings...is maybe needed.
+conf="$root/d0.conf"
+
+# temp - everyone needs one. :)
+if [ -f "$root/.tmp" ]; then
+	rm "$root/.tmp"
+elif [ ! -f "$root/.tmp" ]; then
+	touch "$root/.tmp"
+fi
+TEMP="$root/.tmp"
+
+# Update-server:
+update_srv="http://d0.drachennetz.com/update.d0"
+
+# Filetypes:
+# .d0 = a general d0-file
+# .d0s = a source-file.
+# .d0.d = data-folder.
+# .d0p = Drag0n-Package.
+# .d0i = Info. If present, it will be read before anything else, and is going to be executed with the dot-command.
+
+# function:
+action() {
+	case $1 in
+		make   ) tar cvfz "$2" ;;
+		xtract ) tar xvfz "$2" ;;
+		mdir ) mkdir -p "$2" ;;
+	esac
+}
+#cp() { cp -v "$*"; }
+#mv() { mv -v "$*"; }
+#rm() { rm -v "$*"; }

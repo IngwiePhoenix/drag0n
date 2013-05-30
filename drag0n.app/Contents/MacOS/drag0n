@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+dir=$(dirname "$0")/..
+cd "$dir"
+code='do shell script "sudo -E '$dir'/MacOS/node --harmony '$dir'/bin/d0-gui.js '$*' >/dev/null 2>&1 &" with administrator privileges'
+osascript -e "$code"
+#code='tell application id "com.drag0n.gui" to activate'
+#osascript -e "$code"
