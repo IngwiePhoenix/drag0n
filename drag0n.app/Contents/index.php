@@ -9,9 +9,12 @@ parse_str($_ENV['QUERY_STRING'], $_GET);
 	appleScript: thatURL
 	nodeJS: process.argv[2]
 	
-	Represents the drgn:// scheme
+	Represents the d0:// scheme
 */
 define("_DRGN",$_SERVER['argv'][2]);
+
+// prepair the Data folder
+@mkdir("Data");
 
 // change the following paths if necessary
 $yii=dirname(__FILE__).'/Frameworks/yii.framework/Resources/yii.php';
