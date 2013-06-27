@@ -1,0 +1,97 @@
+html, body {
+  height: 100%;
+  overflow: hidden;
+}
+body {
+	padding: 0;
+	margin: 0;
+	background: url("../img/bg.jpg") no-repeat center center fixed; 
+	-webkit-background-size: cover;
+	background-size: cover;	
+	height: 100%;
+	color: white;
+}
+
+#container {
+	padding-top: 25px;
+	padding-bottom: 25px;
+}
+
+button, input[type=text] {
+	background: black;
+	color: white;
+	border-radius: 10px;
+	outline: none;
+}
+input[type=text] {
+	padding: 3px 3px 3px 3px;
+}
+
+nav {
+	text-align: center;
+	background: rgba(0,0,0, 0.5);
+}
+
+nav a {
+	text-align: center;
+	vertical-align: center;
+	position: relative;
+	display: inline-block;
+	margin: 0 auto;
+	margin-top: 15px;
+	padding-left: 20px;
+	padding-right: 20px;
+	width: 120px;
+	color: lime;
+	font-size: 25px;
+	text-decoration: none;
+	border-radius: 25px;
+}
+nav a:hover, nav a:focus {
+	background: rgba(4, 100, 14, 0.3); /* 22 75 09 */
+}
+nav a img { 
+	width: 80px;
+	margin-left: auto;
+	margin-right: auto;
+}
+nav a img, nav a span {
+	display: block;
+}
+
+#searchbox {
+	width: 87%;
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.navtitle {
+	float: right;
+	margin-right: -90px;
+	margin-top: -55px;
+}
+
+#selectBar { 
+	width: 100%;
+	display: inline-block; 
+	margin-top: -20px; 
+	font-size: 20px;
+	color: lime;
+	text-align:center;
+	vertical-align: center;
+	height: 50px;
+}
+#selectBar * img {
+	margin-left: 10px;
+	margin-right: 10px;
+	height: 40px;
+}
+#sb1 { float: left; }
+#sb3 { float: right; }
+
+a { color: lime; }
+
+#main {
+	padding: 5px 10px 5px 10px;
+}

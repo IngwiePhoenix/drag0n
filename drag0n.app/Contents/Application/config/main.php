@@ -6,7 +6,7 @@
 return array(
 	'basePath'=>dirname(__FILE__).DIRECTORY_SEPARATOR.'..',
 	'name'=>'Drag0n Installer',
-	'theme'=>'drag0n',
+	'theme'=>'NewDrag0n',
 
 	// preloading 'log' component
 	'preload'=>array('log'),

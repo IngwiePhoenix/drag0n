@@ -1,0 +1,166 @@
+<?php $shadow="lime"; ?>
+.centerpic {
+	right: 				auto;
+	left: 				auto;
+	display:			block;
+	margin-left:		auto;
+	margin-right: 		auto;
+	text-align:			center;
+	z-index:			1;
+}
+.row {
+	background: 		rgba(0,0,0, 0.7);
+	padding-left: 		5px;
+	padding-right: 		5px;
+	padding-top:		2px;
+	padding-bottom:		2px;
+}
+.row.large {
+	width: 				100%;
+	float:				left;
+	position:			relative;
+	display:			block;
+}
+.row.small {
+	width:				70%;
+	position:			relative;
+	display:			block;
+}
+.row.button {
+	width:200px;
+	text-align:center;
+	color:white;
+}
+.withBar { 	  width:	75%; }
+.withoutBar { width:	98%; }
+#sidebar {
+	background: 		rgba(0,0,0, 0.4);
+	float:				left;
+	width:				20%;
+	margin-right:		10px;
+	padding-left:		3px;
+	padding-right:		3px;
+	position:			relative;
+}
+#post {
+	margin-left: 		20px;
+	margin-right:		20px;
+}
+#post #title {
+	font-size: 			20pt;
+	margin-left:		10px;
+	margin-bottom:		3px;
+}
+#post #author {
+	margin-bottom:		3px;
+	margin-top:			5px;
+}
+#post #message {
+	margin-top: 		15px;
+	background:			black;
+}
+.verb {
+	width: 130px;
+}
+.verb {
+	width: 55px;
+	display:inline-block;
+}
+.verb3 {
+	width: 300px;
+}
+#appDesc {
+	position:relative;
+	margin-left: 30px;
+	margin-bottom: 150px;
+}
+#appDesc #icon {
+	max-height: 130px;
+	max-width: 130px;
+	position: absolute;
+}
+#appDesc #desc #entry {
+	padding-top: 6px;
+	padding-bottom: 6px;
+	background: rgba(0,0,0,0.0);
+}
+.appIcon {
+	max-height: 130px;
+	max-width: 130px;
+	display:block;
+}
+#appDesc #desc {
+	width: 600px;
+	position:absolute;
+	left:60px;
+}
+#appDesc .row {
+	margin-left:		140px;
+}
+#infosplit { width: 200px; position:absolute; }
+#dscsplit { position: absolute; width: auto; left: 250px; right: 20px; }
+#dscsplit ul { padding-left: 30px; }
+#dscsplit h1 { margin-top: 10px; }
+#dscsplit p { margin-left: 20px; }
+a { text-decoration:none; }
+.bigText { width: 99%; height: 200px; }
+.smallText {width: 96.5%; height: 210px;}
+.miniText {width:96.5%; height: 70px;}
+#clearup { clear: both; padding-top:20px; }
+.clearup2 {clear:both;padding-top:2px;padding-bottom:2px;}
+#splitblock, .splitblock { width:100%; position:relative;}
+#splitblock #split { float:left; width: 49%; margin-left:3px; margin-right:3px; position:relative; }
+.allNormal{padding:0;margin:0;width:auto;height:auto;}
+.forum {
+	border-top:1px solid <?=$shadow?>;
+	border-bottom:1px solid <?=$shadow?>;
+}
+#splitblock #splitS { float:left; width:18%; border-style:solid;border-right:1px solid <?=$shadow?>; border-left:0 solid transparent; border-top:0; border-bottom:0;}
+#splitblock #splitSS { float:left; width:18%;}
+#splitblock #splitS h4 { margin-top: 5px; }
+#splitblock #splitB { float:left; width:80%; padding-left:10px; padding-top: 5px; padding-right: 10px;}
+#splitblock #splitB hr {border-color:<?=$shadow?>;}
+.prettySummary {text-align:left;}
+.entryField {width: 800px; }
+.entryArea {width: 800px; height: 150px;}
+.form-actions { background:transparent; border:0; }
+.categoryHeader {margin-top: 50px;}
+.odd.sticky, .even.sticky {background:rgba(173,255,47, 0.3);}
+td {width:150px;}
+.warning {text-align:center;color:red;}
+fieldset {
+	padding-left: 5px;
+	padding-right: 5px;
+}
+.CBlist {width:100%;position:absolute;}
+.CBentry {width: 200px;float:left;position:relative;}
+.CBitems {padding-bottom:20px;}
+/*System*/
+.errorSummary, div.form .errorSummary, html body div#container div#content.withoutBar div.form form div.row input#UserLogin_username.error {
+	border: 1px solid red;
+	padding: 2px 2px 2px 2px;
+	background: rgba(255,0,0, 0.3);
+}
+div.form div.success select, div.form div.success input, div.form div.success option,
+div.form div.error input, div.form div.error select, div.form div.error option { background:transparent; }
+.errorSummary ul, .errorSummary li { list-style: none; }
+/*#fileInfo {}*/
+#imgDiv {
+	float:left;
+	position:relative;
+	padding-left:15px;
+}
+img.show { height: 130px; }
+.putaway { margin-top:20px; }
+.goCenter { vertical-align: center; }
+.rightWalk { margin-left: 10px; }
+
+/*Modules*/
+#languagePickerContainer {
+	position:			fixed;
+	padding-top:		6px;
+	padding-left:		10px;
+	z-index:			3;
+}
+
+code {background:transparent;}

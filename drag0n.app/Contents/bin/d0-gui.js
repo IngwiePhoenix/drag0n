@@ -122,28 +122,12 @@ var menubar = app.createMenu([{
 	},{
   		label:'&Window',
   		submenu:[{
-    		label:'Fullscreen',
+    		label:'Show/Hide console',
     		action:function(item) {
-      			window.frame.fullscreen();
+      			window.showDev();
+      			window.console.log("realwindow",window);
     		}
-    	},{
-    		label:'Minimize',
-      		action:function(){
-        		window.frame.minimize();
-      		}
-		},{
-			label:'Maximize',
-    		action:function(){
-    			window.frame.maximize();
-      		}
-    	},{
-    		label:''//separator
-    	},{
-    		label:'Restore',
-    		action:function(){
-        		window.frame.restore();
-      		}
-		}]
+    	}]
 }]);
 
 /*var trayMenu = app.createMenu([{
@@ -198,7 +182,9 @@ window.on('ready', function(){
   window.exec = exec;
   window.frame.move(window.frame.left, -window.frame.top, window.frame.width, window.frame.height);
   this.frame.focus();
-  showDrag0n();
+
+  // forfe fullscreen
+  this.frame.fullscreen();
 
   // Open Developer Inspector
   this.frame.openDevTools();

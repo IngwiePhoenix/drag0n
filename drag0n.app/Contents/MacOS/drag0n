@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 dir=$(dirname "$0")/..
+echo "[drag0n/sh] Working folder is now: $dir" >>/Users/Ingwie/d0.log
 cd "$dir"
 code='do shell script "sudo -E '$dir'/MacOS/node --harmony '$dir'/bin/d0-gui.js '$*' >/dev/null 2>&1 &" with administrator privileges'
+echo "[drag0n/osascript] Executing following script now: $code" >>/Users/Ingwie/d0.log
 osascript -e "$code"
-#code='tell application id "com.drag0n.gui" to activate'
-#osascript -e "$code"
