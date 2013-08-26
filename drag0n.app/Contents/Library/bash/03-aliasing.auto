@@ -1,7 +1,0 @@
-#!/bin/bash
-# 02 aliasing.auto
-
-alias undrp="tar xvfz"
-alias drplist="tar zvff"
-alias makedrp="tar cfvz"
-#alias return="echo"

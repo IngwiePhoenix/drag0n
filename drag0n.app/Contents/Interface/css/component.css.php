@@ -1,0 +1,96 @@
+<?php
+	$prefix = ".cbp-spmenu";
+	$prefix2= "";
+	$numbers = array(
+		"leftRight"=>310,
+		"topBottom"=>160
+	);
+?>
+
+/* General styles for all menus */
+<?=WS($prefix)
+	->position(fixed)
+	->padding(5, 5, 5, 5)
+	->overflow(auto)
+->end?>
+
+/* Orientation-dependent styles for the content of the menu */
+<?=WS($prefix."-vertical")
+	->width(300)
+	->height("100%")
+	->top(0)
+	->zIndex(1000) #
+->end?>
+
+<?=WS($prefix."-horizontal")
+	->width("100%")
+	->height(150)
+	->left(0)
+	->zIndex(999)
+->end?>
+
+/* Vertical menu that slides from the left or right */
+
+<?=WS($prefix."-left", $prefix."-right")
+	->text->align(left)
+->end?>
+
+<?=WS($prefix."-left")
+	->left(-$numbers["leftRight"])
+->end?>
+
+<?=WS($prefix."-right")
+	->right(-$numbers["leftRight"])
+->end?>
+
+<?=WS($prefix."-left".$prefix."-open")
+	->left(0)
+->end?>
+
+<?=WS($prefix."-right".$prefix."-open")
+	->right(0)
+->end?>
+
+/* Horizontal menu that slides from the top or bottom */
+<?=WS($prefix."-top")
+	->top(-$numbers['topBottom'])
+->end?>
+
+<?=WS($prefix."-bottom")
+	->bottom(-$numbers['topBottom'])
+->end?>
+
+<?=WS($prefix."-top".$prefix."-open")
+	->top(0)
+->end?>
+
+<?=WS($prefix."-bottom".$prefix."-open")
+	->bottom(0)
+->end?>
+
+/* Push classes applied to the body */
+<?=WS($prefix."-push")
+	->overflow->x(hidden)
+	->left(0)
+->end?>
+
+<?=WS($prefix."-push-toright")
+	->left($numbers['leftRight'])
+->end?>
+
+<?=WS($prefix."-push-toleft")
+	->left(-$numbers['leftRight'])
+->end?>
+
+<?=WS($prefix."-push-tobottom")
+	->top($numbers['topBottom'])
+->end?>
+
+<?=WS($prefix."-push-totop")
+	->bottom($numbers['topBottom'])
+->end?>
+
+/* Transitions */
+<?=WS($prefix, $prefix."-push")
+	->transition("all 0.3s ease")
+->end?>

@@ -1,0 +1,16 @@
+<?php
+	$me = dirname(__FILE__)."/../..";
+	include $me."/Library/WingStyle/WingStyle.php";
+	WS()->load(
+		"cursor", 
+		"background", 
+		"clear"
+	);
+	WS()->beauty=true;
+	
+	include "reset.css";
+	include "component.css.php";
+	include "default.css.php";
+	include "drag0n.css.php";
+	include "table.css";
+?>

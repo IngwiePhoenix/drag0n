@@ -10,12 +10,12 @@
 	}
 	
 	public function actionIndex() {
-		$this->render('index');
+		if($_GET['ajax']) $this->renderPartial("index");
+		else $this->render('index');
 	}
 	
 	public function actionInstall($id="d0.test-package") {
-		$plist = new plistParser;
-		$info = $plist->parseFile(APPJS_ROOT."/".$id.".d0i")->toDrag0n();
+		$info = SpycObject(APPJS_ROOT."/examples/".$id.".d0i");
 		$this->renderPartial("pkg",array("model"=>$info));
 	}
 

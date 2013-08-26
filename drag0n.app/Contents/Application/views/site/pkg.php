@@ -1,8 +1,9 @@
 <?php 
 	include "helper.php";
-	$info = $model->INFO;
+	$info = $model->Info;
 	$tmpFile = tfile();
-	file_put_contents($tmpFile['path'], $model->INFO->icon);
+	file_put_contents($tmpFile['path'], base64_decode($model->Info->icon));
+	$plattforms = array(); foreach($info->plattforms as $v) { $plattforms[]=$v; } $info->plattforms = $plattforms;
 ?>
 <div id="appDesc">
 	<div id="icon"><img src="<?=$tmpFile['url']?>" class="appIcon"></div>
@@ -25,13 +26,13 @@
 		</div>
 	</div>
 </div>
-<div class="row button"><a id="AJAX" href="<?=CHtml::normalizeUrl(array("site/list"))?>">INSTALL (1MB)</a></div>
+<div class="row button"><a class="AJAX" href="<?=CHtml::normalizeUrl(array("site/list"))?>">INSTALL (1MB)</a></div>
 
 <div id="clearup" style="height: 70px;"></div>
 
 <div id="infosplit" class="row small list">
 	<span class="verb2">Author:</span>
-	<a href="mailto:<?=$info->author_email?>"><?=$info->author_name?></a>
+	<a href="mailto:<?=$info->author->email?>"><?=$info->author->name?></a>
 	<hr>
 	<span class="verb2">Note:</span>
 	<?=$info->note?>
@@ -58,9 +59,9 @@
 </div>
 <div id="dscsplit" class="row large">
 	<h1>Description</h1>
-	<p><?=$info->description?></p>
+	<p><?=$info->description->content?></p>
 	<h2>Features</h2>
-	<ul><?php foreach($info->features as $ft) {?>
+	<ul><?php foreach($info->description->features as $ft) {?>
 		<li><?=$ft?></li>
 	<?php } ?></ul>
 </div>

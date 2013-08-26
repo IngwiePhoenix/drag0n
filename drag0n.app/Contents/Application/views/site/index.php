@@ -1,25 +1,12 @@
-<?php
-/* @var $this SiteController */
-
-$this->pageTitle=Yii::app()->name;
-?>
+<?php $this->pageTitle=Yii::app()->name; ?>
 <script>
 	function sendMail(to) {
 		return exec("open mailto:"+to);
 	}
 </script>
-<?php $u=parse_url("http://furaffinity.net/view/10000000"); print_r(array_splice(explode("/",$u['path']), 1)); ?>
-<h1>Welcome to <i><?php echo CHtml::encode(Yii::app()->name); ?></i></h1>
-<a href="#" onclick="sendMail('ingwie2000@gmail.com');">send mail</a>
-<p>Congratulations! You have successfully created your Yii application.</p>
-
-<p>You may change the content of this page by modifying the following two files:</p>
-<ul>
-	<li>View file: <code><?php echo __FILE__; ?></code></li>
-	<li>Layout file: <code><?php echo $this->getLayoutFile('main'); ?></code></li>
-</ul>
-
-<p>For more details on how to further develop this application, please read
-the <a href="http://www.yiiframework.com/doc/">documentation</a>.
-Feel free to ask in the <a href="http://www.yiiframework.com/forum/">forum</a>,
-should you have any questions.</p>
+<img src="<?=Yii::app()->theme->baseUrl?>/icons/green.png" class="centerpic">
+<div class="row large">
+	Welcome to drag0n Installer - the yet only out-of-the-box solution for installing all sorts of custom code, if from source of direct binaries.<br>
+	<br>
+	Explore the features you see here and have a lot of fun with them. Further updates will include better and new options.
+</div>

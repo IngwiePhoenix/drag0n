@@ -1,0 +1,30 @@
+.TH "d0p" 8 "2013" "drag0n packaging command line interface"
+.SH NAME
+.B d0p 
+- drag0n packaging tool
+.SH SYNOPSIS
+d0p unpack archive.d0p output...
+.br
+d0p pack archive.d0p file.a file.b file.c
+.SH DESCRIPTION
+The
+.B d0p
+utillity helps you to create your own drag0n package files, or extract ones you downloaded off the internet.
+.SH EXAMPLES
+
+.SS Unpacking:
+d0p unpack /Users/Ingwie/Downloads/com.example.app.d0p /Users/Ingwie/testEnvironment
+.br
+This will extract the contents of the archive
+.B com.example.app.d0p
+into
+.B /Users/Ingwie/testEnvironment .
+Please note, that every file will be unpacked relative to the output directory. So a file that has been registered as "foo/bar.txt" would be unpacked like 
+.B /Users/Ingwie/testEnvironment/foo/bar.txt .
+In the default installer interface, the default extraction path is
+.B / .
+
+.SS Packing:
+Packing works very similar to unpacking, except that the last parameter is exchanged by a file list. In this case though, you might wan't to be careful: If you pass absolute paths, then these will be valued as "relative" paths! So make sure you made a folder with all the files within. Then use some tweaking with the
+.B du
+command to get a propper file list. In newer versions, this programm will also allow you to just specify a folder, and all it's contents will become parts of the archive.

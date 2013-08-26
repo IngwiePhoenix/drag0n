@@ -1,21 +1,23 @@
-<?php
+<?php global $_vYii, $_vNodeJS, $_vAppJS;
+$me = dirname(__FILE__)."/../..";
+include_once dirname(__FILE__).DIRECTORY_SEPARATOR.'../components/d0.php';
 
-// uncomment the following to define a path alias
-// Yii::setPathOfAlias('local','path/to/local-folder');
+// Aliases
+Yii::setPathOfAlias("Library",APPJS_ROOT."/Library");
 
 return array(
 	'basePath'=>dirname(__FILE__).DIRECTORY_SEPARATOR.'..',
-	'name'=>'Drag0n Installer',
-	'theme'=>'NewDrag0n',
+	'name'=>'drag0n Installer',
+	'theme'=>'Interface',
 
 	// preloading 'log' component
-	'preload'=>array('log'),
+	'preload'=>array('log','Apple'),
 
 	// autoloading model and component classes
 	'import'=>array(
 		'application.models.*',
 		'application.components.*',
-		#'webroot.bin.*',
+		'Library.macos.Apple',
 	),
 
 	'modules'=>array(),
@@ -33,13 +35,14 @@ return array(
 			),
 		),
 		'assetManager' =>array(
-			'basePath'=>dirname(__FILE__).DIRECTORY_SEPARATOR.'../../Data',
-			'baseUrl'=>'/Data/'
+			'basePath'=>"$me/System/etc/interface.d",
+			'baseUrl'=>'/System/etc/interface.d'
 		),
 		'themeManager' =>array(
-			'basePath'=>dirname(__FILE__).DIRECTORY_SEPARATOR.'../../Interface',
-			'baseUrl'=>'/Interface/'
+			'basePath'=>dirname(__FILE__).DIRECTORY_SEPARATOR.'../../',
+			'baseUrl'=>'/'
 		),
+		'Apple'=>array( "class"=>"Apple" ),
 	),
 
 	// application-level parameters that can be accessed
@@ -47,8 +50,9 @@ return array(
 	'params'=>array(
 		// this is used in contact page
 		'adminEmail'=>'ingwie2000@googlemail.com',
-		'version'=>'0.1b (appJS:0.20, node.js:0.9)',
-		'tBasePath'=>APPJS_BASEDIR."themes/drag0n",
+		'version'=>'drag0n Installer: '.Drag0nInstaller::version()
+				  .'<br>drag0n GUI: '.$_ENV['D0G_VERSION'].'<br>'
+				  .'<i>appJS:'.$_vAppJS.', node.js:'.$_vNodeJS.', Yii:'.$_vYii.'</i>',
 		'basePath'=>APPJS_BASEDIR,
 	),
 );

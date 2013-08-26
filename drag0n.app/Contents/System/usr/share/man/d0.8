@@ -1,0 +1,117 @@
+.TH "d0" 8 "2013" "drag0n command line interface"
+.SH NAME
+.B d0 
+- drag0n Installer command line interface
+.SH SYNOPSIS
+.B d0 
+<action> <type> [args...]
+.SH DESCRIPTION
+The 
+.B d0 
+utillity is a wrapper script to access the PHP-API of the drag0n Installer. It supports the same parameters as the HTTP-API (d0://<action>/<args>).
+
+.SH ACTIONS
+
+.SS install
+Install a package. Possible potions are:
+
+.IP id
+A package ID.
+.br
+I.e.: d0 install id com.yiiframework.yii1 com.sourceforge.someProject ...
+
+.IP url
+A vaild URL which results into a vaild 
+.B d0p
+archive.
+.br
+I.e.: d0 install url http://drag0ninstaller.tk/pkgs/d0.api.php.drag0nInstaller_1.0.d0p
+
+.IP file
+A vaild d0p file.
+.br
+I.e.: d0 install file /User/Ingwie/Work/d0.php.api.APTFile.d0p
+
+.IP list
+A file, containing a list of packages in the format 
+.I (url|id|file)
+::
+.I (http(s)://...|id|/Users/Ingwie/...)
+.br
+An example file could look like this:
+.br
+.I url::http://drag0ninstaller.tk/pkgs/d0.gui.d0p
+.br
+.I id::com.jquery.jquery110
+.br
+.I file::/Users/Ingwie/Work/d0.api.php.APTFile_1.0b.d0p
+.br
+.p
+I.e.: d0 install list /Users/Ingwie/Work/drag0n.lst
+.br
+.B OR
+.br
+I.e.: d0 install list $(curl http://drag0ninstaller.tk/beta/joinBeta.lst)
+
+.SS uninstall
+For this, the above options are applied - just that the packages will be
+.B UNINSTALLED
+\.
+
+.SS update
+This updates eighter the programm itself, or the packages.
+.IP self
+Updates drag0n Installer itself.
+.IP pkg
+Updates all packages. If you supply a list of 
+.B package ID's
+we'll only update these.
+
+.SS search
+Search all repositories for a package. Possible types are:
+.IP str
+A string with which the database should be searched
+.IP id
+Search the database by the package ID.
+
+.SS resource
+Manage the resources associated to drag0n. Possible options are:
+.IP add
+Add a resource
+.br
+I.e.: d0 resource add http://example.com/d0
+.br
+You can optimally specify the resource's metafile. If you did, call the script this way:
+.br
+d0 resource add --metafile http://example.com/d0/meta.d0i
+.IP add-name
+Add a resource from the list of trusted resources
+.br
+I.e.: d0 resource add-name ExampleDomain
+.IP list
+List all available resources. This is important for the next type.
+.br
+.b FOR DEVS:
+This returns the list of domains in a similar format to
+.B d0 install list
+.br
+An example would be:
+.br
+1::http://drag0ninstaller.tk/::drag0n Installer default resource (DIDR)
+.br
+2::http://example.com/d0::Example Resource
+.IP remove
+This removes a resource by it's 
+.I assigned number 
+- use the above before to find out about your resource.
+
+.SH GLOBAL PARAMETERS
+.SS --verbose
+Supply this, and you'll see more output.
+.SS --encode=[json|serialize]
+The outputted data will be echo'd as the specified type. Only usable for developers.
+
+.SH SEE ALSO
+drag0n.app/Contents/Application/
+.SH AUTHOR
+Ingwie Phoenix (ingwie2000@googlemail.com)

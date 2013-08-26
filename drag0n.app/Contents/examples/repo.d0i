@@ -1,0 +1,12 @@
+name: drag0n Installer default resource (DIDR)
+id: DIDR
+icon: "base64 decoded"
+web: http://drag0ninstaller.tk
+resource: http://drag0ninstaller.tk
+description: This is the default resource of packages.
+hoster:
+  name: Ingwie Phoenix
+  email: ingwie2000@googlemail.com
+author:
+  name: Ingwie Phoenix
+  email: ingwie2000@googlemail.com
