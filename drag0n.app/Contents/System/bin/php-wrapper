@@ -1,0 +1,7 @@
+#!/bin/bash
+DIR="$(dirname $0)"
+
+# Important script to make DYLD work right.
+DYLD_LIBRARY_PATH=$DIR/../usr/lib
+
+$DIR/php $*

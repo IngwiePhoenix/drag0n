@@ -1,6 +1,8 @@
 // The information:
 var Drag0nGUI_Version = "0.2b";
-console.log(process.env);
+var NJS_Version = process.version;
+var AJS_Version = require(__dirname+"/../System/lib/node/appjs/package.json").version;
+
 // The GUI code
 var
 	cwd 		=	process.cwd()+"/Library/node_modules",
@@ -10,7 +12,8 @@ var
 	fs 			= 	require('fs'),
 	mime 		= 	require('mime'),
 	MAIN 		= 	path.resolve(__dirname,'../')+"/",
-	defaultpage = 	'MacOS/d0GUI.php';
+	defaultpage = 	'MacOS/d0GUI.php',
+	php_bin		=	path.resolve(__dirname,"../")+"/System/bin/php-cgi";
 
 function in_array(item,arr) {
 	for(p=0;p<arr.length;p++) { if(item == arr[p]) return true; }
@@ -27,11 +30,11 @@ var phpRouter = function router(request, response, next){
 			switch(path.extname(url)) {
 				case ".css": 
 					mimetype = "text/css";
-					exe = "php";
+					exe = php_bin;
 					break;
 				case ".php": 
 					mimetype = "text/html"; 
-					exe = "php";
+					exe = php_bin;
 					break;
 				case ".bash":
 				case ".sh": 
@@ -49,9 +52,11 @@ var phpRouter = function router(request, response, next){
 				qstring += p+"="+request.params[p]+"&";
 			}
 			
+			// Prepairing a fake-environment for php-cgi...yes, I insist in using that :)
 			env = process.env;
 			if(typeof env._DRGN == "undefined") env._DRGN=null;
 			env = {
+				// Fake PHP-CGI
 				"DOCUMENT_ROOT":MAIN,
 				"HTTP_HOST":"appjs",
 				"SERVER_NAME":"appjs",
@@ -62,11 +67,21 @@ var phpRouter = function router(request, response, next){
 				"HTTP_HOST":"appjs",
 				"PHP_SELF":url,
 				"SCRIPT_NAME":url,
-				'QUERY_STRING':qstring,
+				"REDIRECT_STATUS":0,
+				'SCRIPT_FILENAME':MAIN+url.substring(1),
+				"QUERY_STRING":qstring,
+				
+				// Real environment.
 				"D0G_VERSION":Drag0nGUI_Version,
+				"NJS_VERSION":NJS_Version,
+				"AJS_VERSION":AJS_Version,
+				
+				// We no longer need to patch the userspace - lets just tweak Apple!
+				"DYLD_LIBRARY_PATH":MAIN+"/System/usr/lib",
 			}
-
-			$PHP = spawn(exe,[MAIN+url.substring(1), _arg],{'env':env});
+			
+			console.log(qstring);
+			$PHP = spawn(exe, ["-n", MAIN+url.substring(1)], {'env':env});
 			var allData = "";
 			var code = 200;
 			$PHP.stdout.on('data',function(data) {
@@ -78,6 +93,17 @@ var phpRouter = function router(request, response, next){
 				code = 500;
 			});
 			$PHP.stdout.on('end',function() {
+				/*
+					We need to remove 4 lines - which are:
+					1: X-Powered-By: php/5.4.10
+					2: Content-type: text/html
+					3: 
+					4: #! ../System/bin/php
+					The rest can just be stripped.			
+				*/
+				var allArray = allData.split("\n");
+				allArray.splice(0,4);
+				allData = allArray.join("\n").trim();
 				response.send(code,mimetype,allData);
 			});
 		} else {
@@ -96,7 +122,8 @@ var phpRouter = function router(request, response, next){
 function runCmd(file, args, w) {
 	var 
 		execStr = file+" "+args.join(" "),
-		executer = process.cwd()+"/System/bin/executer.sh";
+		executer = __dirname+"/../System/bin/executer.sh";
+	w.console.log("nodejs/runCmd", "$PATH => "+process.env.PATH);
 	w.console.log("nodejs/runCmd",execStr);
 	process.env.THE_ARGS = execStr;
 	var TheCommand = spawn(executer, []);
@@ -179,21 +206,14 @@ var window = app.createWindow({
   top: -1,
   left: -1,
   icons  : __dirname+'/../Interface/icons',
-  resizable: false,
+  resizable: true,
   autoResize: false,
-  alpha:true,
-  showChrome:false,
+  alpha:false,
+  showChrome:true,
 });
 
 window.on('create', function(){
 	console.log("[Window] \"create\" event called");
-  	this.frame.center();
-  	window.require = require;
-  	window.process = process;
-  	window.module = module;
-  	window.terminal = console;
-  	window.runCmd = runCmd;
-  	window.frame = this.frame;
   	window.frame.setMenuBar(menubar);
 });
 
@@ -205,18 +225,13 @@ window.on('ready', function(){
   	window.terminal = console;
   	window.runCmd = runCmd;
   	window.frame = this.frame;
+  	window.__dirname = __dirname;
   	window.frame.move(window.frame.left, -window.frame.top, window.frame.width, window.frame.height);
   	this.frame.show();
   	this.frame.focus();
 
   	// force fullscreen
   	this.frame.fullscreen();
-  	var interval = setInterval(function(){ 
-  		//window.console.log(window.frame.state);
-  		//window.frame.fullscreen(); window.frame.restore();
-  		//window.frame.restore();
-  		//window.frame.fullscreen();
-  	},100);
   
   	// Open Developer Inspector
   	this.frame.openDevTools();

@@ -1,4 +1,5 @@
-<?php global $_vYii, $_vNodeJS, $_vAppJS;
+<?php 
+$_vYii = Yii::getVersion();
 $me = dirname(__FILE__)."/../..";
 include_once dirname(__FILE__).DIRECTORY_SEPARATOR.'../components/d0.php';
 
@@ -52,7 +53,9 @@ return array(
 		'adminEmail'=>'ingwie2000@googlemail.com',
 		'version'=>'drag0n Installer: '.Drag0nInstaller::version()
 				  .'<br>drag0n GUI: '.$_ENV['D0G_VERSION'].'<br>'
-				  .'<i>appJS:'.$_vAppJS.', node.js:'.$_vNodeJS.', Yii:'.$_vYii.'</i>',
+				  .'Bin: node.js/'.$_ENV['NJS_VERSION'].", php/".phpversion()."<br/>"
+				  .'Mod: appJS/'.$_ENV['AJS_VERSION'].', Yii/'.$_vYii."<br/>"
+				  ."Ext: pthreads/".(new ReflectionExtension("pthreads"))->getVersion(),
 		'basePath'=>APPJS_BASEDIR,
 	),
 );

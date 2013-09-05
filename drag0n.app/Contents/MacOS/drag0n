@@ -9,32 +9,38 @@ class drag0n {
 		echo $msg."\n";
 	}
 
-	public static function main($argc, array $argv) {
+	public static function main($argc, $argv) {
 		$options = getopt(self::$shortopts, self::$longopts);
 
+		// Quick, a key!
+		$key = ( isset($options["uri"]) 
+			? "uri" 
+			: ( isset($options["u"]) 
+				? "u" 
+				: null 
+			)
+		);
+		if(!is_null($key))
+			$opt = $options[$key];
+		else 
+			$opt = null;
+
 		// Run the webapp if we are asked to.
-		if( isset($options['appjs']) || (defined("_DISPLAY_WEB") && _DISPLAY_WEB) ) { 
-			// Quick, a key!
-			$key = ( isset($options["uri"]) 
-				? "uri" 
-				: ( isset($options["u"]) 
-					? "u" 
-					: null 
-				)
-			);
-			if(!is_null($key)) { $_ENV["_DRGN"] = $options[$key]; }
-			self::runWeb($options); 
-		} else { self::runApp($argc, $argv); }
+		if( isset($options['appjs']) || (defined("_DISPLAY_WEB") && _DISPLAY_WEB) )
+			self::runWeb($options, $opt); 
+		else
+			self::runApp($argc, $argv, $opt);
 	}
 	
-	public static function runApp($argc, array $argv) {
+	public static function runApp($argc, array $argv, $opt) {
+		if(!is_null($opt)) putenv("_DRGN=$opt");
 		$dir = realpath( dirname($argv[0])."/.." );
 		self::logger("[drag0n/php] Working folder is now: $dir");
-		$_ENV['NODE_PATH'] = "$dir/System/lib/node";
+		putenv("NODE_PATH=$dir/System/lib/node");
 		self::logger("[drag0n/php] Adding NODE_PATH: ".$_ENV['NODE_PATH']);
 		$script = escapeshellarg(
 			'do shell script "'
-			."NODE_PATH='".$_ENV['NODE_PATH']."'; sudo -E $dir/MacOS/node --harmony $dir/MacOS/d0GUI.js ".join(" ", $argv)." >/dev/null 2>&1 &" // 
+			."sudo -E $dir/MacOS/node --harmony $dir/MacOS/d0GUI.js $opt >/dev/null 2>&1 &"
 			.'" with administrator privileges'
 		);
 		self::logger("[Apple/osascript] Executing: $script");
@@ -42,10 +48,6 @@ class drag0n {
 	}
 	
 	public static function runWeb($uri) {
-		// $_GET is not available - appJS runs php as CLI. now, lets parse get oruself.
-		$_GET=array();
-		parse_str($_ENV['QUERY_STRING'], $_GET);
-
 		// Prepair our workspace
 		$dir = realpath( dirname(__FILE__)."/.." );
 		include_once($dir."/Library/macos/Apple.php");
@@ -63,12 +65,6 @@ class drag0n {
 
 		// We NEED Yii.
 		require_once($yii);
-
-		// Versions
-		$_vYii = Yii::getVersion();
-		$_jAppJS = json_decode(file_get_contents($dir."/System/lib/node/appjs/package.json"));
-		$_vAppJS = $_jAppJS->version;
-		$_vNodeJS = exec($dir."/MacOS/node --version");
 
 		// remove the following lines when in production mode
 		defined('YII_DEBUG') or define('YII_DEBUG',true);

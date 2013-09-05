@@ -10,12 +10,12 @@
 	}
 	
 	public function actionIndex() {
-		if($_GET['ajax']) $this->renderPartial("index");
+		if(isset($_GET['ajax']) && $_GET['ajax']) $this->renderPartial("index");
 		else $this->render('index');
 	}
 	
 	public function actionInstall($id="d0.test-package") {
-		$info = SpycObject(APPJS_ROOT."/examples/".$id.".d0i");
+		$info = SpycObject(APPJS_ROOT."/System/usr/examples/".$id.".d0i");
 		$this->renderPartial("pkg",array("model"=>$info));
 	}
 
