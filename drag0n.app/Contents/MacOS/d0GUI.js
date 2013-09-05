@@ -238,7 +238,7 @@ window.on('ready', function(){
   	this.frame.focus();
 
   	// force fullscreen
-  	this.frame.fullscreen();
+  	// this.frame.fullscreen();
   
   	// Open Developer Inspector
   	this.frame.openDevTools();
