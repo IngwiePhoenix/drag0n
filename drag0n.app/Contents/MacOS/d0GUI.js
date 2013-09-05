@@ -8,6 +8,7 @@ var
 	cwd 		=	process.cwd()+"/Library/node_modules",
 	spawn 		= 	require('child_process').spawn,
 	app 		= 	module.exports = require('appjs'),
+	fs			=	require("fs"),
 	path 		= 	require('path'),
 	fs 			= 	require('fs'),
 	mime 		= 	require('mime'),
@@ -91,7 +92,11 @@ var phpRouter = function router(request, response, next){
 			});
 			$PHP.stderr.on("data",function(data) {
 				console.log("[Error]: "+data);
-				allData += data;
+				fs.appendFile(
+					MAIN+"/Logs/PHP.stderr", 
+					"[Error]: "+data+"\n", 
+					function(e){/* avoid force-quitting the app */}
+				);
 				code = 500;
 			});
 			$PHP.stdout.on('end',function() {
