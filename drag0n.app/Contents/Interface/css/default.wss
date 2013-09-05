@@ -1,17 +1,17 @@
 <?php $menuPrefix = ".cbp-spmenu-"; ?>
-<?php $menuPrefix2 = nav."#".substr($menuPrefix,1); ?>
+<?php $menuPrefix2 = "nav#".substr($menuPrefix,1); ?>
 
-<?=WS(body)
-	->position(absolute)
+<?=WS("body")
+	->position("absolute")
 	->height("100%")
 	->width("100%")
-	->overflow(hidden)
-	->cursor(_default_)
+	->overflow("hidden")
+	->cursor("_default_")
 	->padding(0)
 	->margin(0)
 	->background('url(/Interface/img/bg.jpg)', "no-repeat", center, center, fixed)
-	->color(white)
-	->userSelect(none)
+	->color("white")
+	->userSelect("none")
 ->end?>
 
 <?=WS("#container")
@@ -19,14 +19,14 @@
 	->padding->bottom(25)
 ->end?>
 
-<?=WS(button, input."[type=text]")
-	->background(black)
-	->color(white)
+<?=WS("button", "input[type=text]")
+	->background("black")
+	->color("white")
 	->borderRadius(10)
-	->outline(none)
+	->outline("none")
 ->end?>
 
-<?=WS(input."[type=text]")
+<?=WS("input[type=text]")
 	->padding(3, 3, 3, 3)
 ->end?>
 
@@ -35,32 +35,32 @@
 	->padding->right(10)
 ->end?>
 
-<?=WS(nav)
+<?=WS("nav")
 	->background->rgba(0,0,0, 0.5)
 ->end?>
 
 <?=WS($menuPrefix2."s3")
-	->text->align(center)
+	->text->align("center")
 ->end?>
 
 <?=WS($menuPrefix2."s3 a")
-	->text->align(center)
-	->verticalAlign(center) #
-	->position(relative)
-	->display(inlineBlock)
-	->margin(0, auto)
+	->text->align("center")
+	->verticalAlign("center")
+	->position("relative")
+	->display("inlineBlock")
+	->margin(0, "auto")
 	->margin->top(15)
 	->padding->left(20)
 	->padding->right(20)
 	->width(120)
-	->color(lime)
+	->color("lime")
 	->font->size(25)
-	->text->decoration(none)
+	->text->decoration("none")
 	->borderRadius(25)
 ->end?>	
 
 <?=WS("nav a")
-	->color(lime)
+	->color("lime")
 ->end?>
 
 <?=WS("nav a:hover", "nav a:focus")
@@ -69,38 +69,38 @@
 
 <?=WS($menuPrefix2."s3 a img")
 	->width(80)
-	->margin->left(auto)
-	->margin->right(auto)
+	->margin->left("auto")
+	->margin->right("auto")
 ->end?>
 
 <?=WS($menuPrefix2."s3 a img", $menuPrefix2."s3 a span")
-	->display(block)
+	->display("block")
 ->end?>
 
 <?=WS("#searchbox")
 	->width("87%")
-	->display(block)
-	->margin->left(auto)
-	->margin->right(auto)
+	->display("block")
+	->margin->left("auto")
+	->margin->right("auto")
 ->end?>
 
 <?=WS(".navtitle")
-	->float(right)
+	->float("right")
 	->margin->right(-90)
 	->margin->top(-55)
 ->end?>
 
 <?=WS("#container")
-	->overflow(hidden)
+	->overflow("hidden")
 ->end?>
 
 <?=WS("#selectBar")
 	->width("100%")
-	->display(inlineBlock)
-	->color(lime)
-	->text->align(center)
+	->display("inlineBlock")
+	->color("lime")
+	->text->align("center")
 	->height(55)
-	->position(absolute)
+	->position("absolute")
 	->top(0)->left(0)->right(0)
 	->padding->top(5)
 	#->zIndex(5)
@@ -111,32 +111,32 @@
 	->margin->right(10)
 	->height(40)
 ->end?>
-<?=WS("#sb1")->float(left)->end?>
-<?=WS("#sb3")->float(right)->end?>
+<?=WS("#sb1")->float("left")->end?>
+<?=WS("#sb3")->float("right")->end?>
 
-<?=WS(a)
-	->color(lime)
-	->cursor(normal)
+<?=WS("a")
+	->color("lime")
+	->cursor("normal")
 ->end?>
 
 <?=WS("#main")
-	->position(absolute)
+	->position("absolute")
 	->left(10)
 	->right(10)
 	->bottom(40)
 	->top(60)
-	->overflow->y(auto)
-	->overflow->x(hidden)
+	->overflow->y("auto")
+	->overflow->x("hidden")
 ->end?>
 
 <?=WS("#activity")
-	->position(absolute)
+	->position("absolute")
 	->bottom(0)
 	->left(0)
 	->right(0)
 	->height(20)
 	->background->rgba(0,0,0, 0.5)
-	->color(lime)
+	->color("lime")
 	->padding(10, 10, 10, 10)
 ->end?>
 
@@ -146,11 +146,11 @@
 ->end?>
 
 <?=WS("#progInfo")
-	->display(inline)
+	->display("inline")
 ->end?>
 
 <?=WS("#showConsole")
-	->position(absolute)
+	->position("absolute")
 	->right(10)
 	->bottom(5)
 	->height(30)
@@ -158,29 +158,29 @@
 
 <?=WS("#console")
 	->font->family("Andale Mono")
-	->whiteSpace(pre)
-	->cursor(auto)
-	->userSelect(text)
+	->whiteSpace("pre")
+	->cursor("auto")
+	->userSelect("text")
 ->end?>
 
 <? $console = "#console div."; ?>
 <?=WS($console."status")
-	->font->weight(bold)
+	->font->weight("bold")
 ->end?>
 
 <?=WS($console."error")
-	->color(red)
+	->color("red")
 ->end?>
 
 <?=WS($console."cmd")
-	->font->weight(silver)
+	->font->weight("silver")
 ->end?>
 
 <?=WS($console."success")
-	->color(lime)
-	->font->weight(bold)
+	->color("lime")
+	->font->weight("bold")
 ->end?>
 
 <?=WS($console."debug")
-	->font->style(italic)
+	->font->style("italic")
 ->end?>

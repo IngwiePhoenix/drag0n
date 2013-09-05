@@ -9,9 +9,9 @@
 
 /* General styles for all menus */
 <?=WS($prefix)
-	->position(fixed)
+	->position("fixed")
 	->padding(5, 5, 5, 5)
-	->overflow(auto)
+	->overflow("auto")
 ->end?>
 
 /* Orientation-dependent styles for the content of the menu */
@@ -32,7 +32,7 @@
 /* Vertical menu that slides from the left or right */
 
 <?=WS($prefix."-left", $prefix."-right")
-	->text->align(left)
+	->text->align("left")
 ->end?>
 
 <?=WS($prefix."-left")

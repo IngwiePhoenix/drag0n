@@ -6,10 +6,15 @@ class drag0n {
 	public static $shortopts = "au:";
 
 	public static function logger($msg) {
-		echo $msg."\n";
+		static $stderr;
+		if (!is_resource($stderr))
+			$stderr = fopen("php://stderr", "w");
+		fwrite($stderr, $msg."\n");
 	}
 
 	public static function main($argc, $argv) {
+		$_ENV += $_SERVER; // $_ENV isn't always populated 
+
 		$options = getopt(self::$shortopts, self::$longopts);
 
 		// Quick, a key!
@@ -31,7 +36,7 @@ class drag0n {
 		else
 			self::runApp($argc, $argv, $opt);
 	}
-	
+
 	public static function runApp($argc, array $argv, $opt) {
 		if(!is_null($opt)) putenv("_DRGN=$opt");
 		$dir = realpath( dirname($argv[0])."/.." );
@@ -54,6 +59,8 @@ class drag0n {
 
 		// prepair the Data folder
 		@mkdir($dir."/System/etc/interface.d");
+		@mkdir($dir."/System/tmp");
+		@mkdir($dir."/Application/runtime");
 
 		// change the following paths if necessary
 		$yii=$dir.'/Frameworks/yii.framework/Resources/yii.php';
