@@ -1,4 +1,4 @@
-# The drag0n Installer.
+# The drag0n Installer: 0.2 ALPHA-PREVIEW
 
 Have you ever had the problem, that you needed to install a package, but you weren't familar wit compiling from source?
 Or...have you ever just needed a library real quick, like `libcurl`?
