@@ -43,7 +43,7 @@ With a copy of drag0n, you get:
 ## Wait, what, MULTITHREADING?!
 
 Oh yes, you totally got this right.
-@bwoebi created the `pthreads` extension, that gives PHP coders three classes:
+[@bwoebi](https://github.com/bwoebi) created the `pthreads` extension, that gives PHP coders three classes:
 
 - Thread
 - Worker
@@ -54,7 +54,7 @@ The first is self-explaining, whilst the second and third are stuck together. A 
 
 ## But...its PHP - how did it just go...DESKTOP?
 
-The answer here is appJS - @milani's work.
+The answer here is appJS - [@milani](https://github.com/milani)'s work.
 appJS is a...err... Hm. I would say it's a library. This library allows me to spawn a browser window. But unlike node-webkit or such things, I can actually manipulate the router function - THAT function that serves the files! So in here, I was able to emulate a CGI environment, and plugged a window management into PHP. Because i can operate forth and back. From within the "webview", I can then still use JavaScript to use node.js related functions. So I could trigger another PHP script to execute in the background and log its output into the integrated console - and once done, can tell the webview to change.
 As you can see; I am able to do quite a lot of new things. with PHP. 
 
@@ -67,7 +67,7 @@ Yup! Absolutely! If we have a package that comes as source code, or if you are c
 ## You use Spyc, why not the actual module?
 
 *Yaaaawn*. Lazyness bro! :D
-The work that @tekimaki did, is inspiring! And, I am able to patch and hack about as well. So, the native PHP module would parse YAML files into arrays - with my own addition `SpycObject` I am parsing it into an ArrayObject instead - means I am staying OOP. Why? ...well, I hate typing `$variable['key']`... o-o
+The work that [@tekimaki](https://github.com/tekimaki) did, is inspiring! And, I am able to patch and hack about as well. So, the native PHP module would parse YAML files into arrays - with my own addition `SpycObject` I am parsing it into an ArrayObject instead - means I am staying OOP. Why? ...well, I hate typing `$variable['key']`... o-o
 But really, having a PHP module like that is very useful, and tutoring too.
 
 
@@ -110,7 +110,7 @@ Gimme feedback, PR's or whatever you would liek to give me :)
 
 
 # A load of mentions and thanks and credits...
-@milani : AppJS is what made this possible. Thank you for this lib, please continue it!
-@tekimaki : Thanks to Spyc, I now have a foolproof configuration file format. This is plain amazing!
-@bwoebi : pthreads is going to change the way I will be coding PHP in the future, dramatically. Thanks for helping me getting it to work! Keep up the great work!
-@mstratman : CocoaDialog makes it possible to keep my users from staring into a terminal when I perform updates to the behind-the-scenes things. Great work there!
+[@milani](https://github.com/milani) : AppJS is what made this possible. Thank you for this lib, please continue it!
+[@tekimaki](https://github.com/tekimaki) : Thanks to Spyc, I now have a foolproof configuration file format. This is plain amazing!
+[@bwoebi](https://github.com/bwoebi) : pthreads is going to change the way I will be coding PHP in the future, dramatically. Thanks for helping me getting it to work! Keep up the great work!
+[@mstratman](https://github.com/mstratman) : CocoaDialog makes it possible to keep my users from staring into a terminal when I perform updates to the behind-the-scenes things. Great work there!
