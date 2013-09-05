@@ -23,21 +23,21 @@ That's it. ^3^
 # What comes with drag0n?
 
 With a copy of drag0n, you get:
-- (PHP)[http://php.net] 5.5.3
-    - (pthreads)[https://github.com/bwoebi/pthreads] 0.45-rc
+- [PHP](http://php.net) 5.5.3
+    - [pthreads](https://github.com/bwoebi/pthreads) 0.45-rc
     - original headers!
-- (Yii)[http://yiiframework.com] 1.1.14
-- (Spyc)[https://github.com/tekimaki/spyc]
-- (PHPLinq)[http://phplinq.codeplex.com]
-- (GCC)[http://hpc.sourceforge.net] 4.9
+- [Yii](http://yiiframework.com) 1.1.14
+- [Spyc](https://github.com/tekimaki/spyc)
+- [PHPLinq](http://phplinq.codeplex.com)
+- [GCC](http://hpc.sourceforge.net) 4.9
 	- included libgcc with headers
-- (Make)[http://www.gnu.org/software/software.html] 3.82
-- (dylibbundler)[http://macdylibbundler.sourceforge.net] 0.4.1
-- (node.js)[http://nodejs.org] 0.8.0
-- (appjs)[https://github.com/appjs/appjs] 0.20
+- [Make](http://www.gnu.org/software/software.html) 3.82
+- [dylibbundler](http://macdylibbundler.sourceforge.net) 0.4.1
+- [node.js](http://nodejs.org) 0.8.0
+- [appjs](https://github.com/appjs/appjs) 0.20
 - Precompiled libcurl, libmcrypt, icu, tidy, libpng and GD dynamic libraries
-- (CocoaDialog)[https://github.com/mstratman/cocoadialog]
-- (wget)[http://www.techtach.org/wget-prebuilt-binary-for-mac-osx-lion] 1.13
+- [CocoaDialog](https://github.com/mstratman/cocoadialog)
+- [wget](http://www.techtach.org/wget-prebuilt-binary-for-mac-osx-lion) 1.13
 
 
 ## Wait, what, MULTITHREADING?!
