@@ -53,8 +53,6 @@ var phpRouter = function router(request, response, next){
 			}
 			
 			// Prepairing a fake-environment for php-cgi...yes, I insist in using that :)
-			env = process.env;
-			if(typeof env._DRGN == "undefined") env._DRGN=null;
 			env = {
 				// Fake PHP-CGI
 				"DOCUMENT_ROOT":MAIN,
@@ -77,10 +75,14 @@ var phpRouter = function router(request, response, next){
 				"AJS_VERSION":AJS_Version,
 				
 				// We no longer need to patch the userspace - lets just tweak Apple!
-				"DYLD_LIBRARY_PATH":MAIN+"/System/usr/lib",
+				"DYLD_LIBRARY_PATH":MAIN+"/System/usr/lib",				
 			}
+			if(typeof env._DRGN == "undefined") env._DRGN=null;
+			for(var _e in process.env) { env[_e] = process.env[_e]; }
+			env.TERM="dumb";
 			
-			console.log(qstring);
+			console.log("PHP environment:", env);
+
 			$PHP = spawn(exe, ["-n", MAIN+url.substring(1)], {'env':env});
 			var allData = "";
 			var code = 200;

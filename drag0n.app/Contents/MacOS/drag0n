@@ -2,7 +2,7 @@
 <?php
 class drag0n {
 
-	public static $longopts = array("appjs", "uri:");
+	public static $longopts = array("appjs", "uri:", "debug");
 	public static $shortopts = "au:";
 
 	public static function logger($msg) {
@@ -11,6 +11,12 @@ class drag0n {
 
 	public static function main($argc, $argv) {
 		$options = getopt(self::$shortopts, self::$longopts);
+
+		// Debug
+		if(isset($options["debug"])) 
+			$debug = true;
+		else
+			$debug = false;
 
 		// Quick, a key!
 		$key = ( isset($options["uri"]) 
@@ -29,22 +35,28 @@ class drag0n {
 		if( isset($options['appjs']) || (defined("_DISPLAY_WEB") && _DISPLAY_WEB) )
 			self::runWeb($options, $opt); 
 		else
-			self::runApp($argc, $argv, $opt);
+			self::runApp($argc, $argv, $opt, $debug);
 	}
 	
-	public static function runApp($argc, array $argv, $opt) {
+	public static function runApp($argc, array $argv, $opt, $debug) {
 		if(!is_null($opt)) putenv("_DRGN=$opt");
+		
+		if($debug)
+			$redirect="";
+		else
+			$redirect=">>/Users/Ingwie/d0.log 2>>/Users/Ingwie/d0.log 2>&1 &";
+		
 		$dir = realpath( dirname($argv[0])."/.." );
 		self::logger("[drag0n/php] Working folder is now: $dir");
 		putenv("NODE_PATH=$dir/System/lib/node");
-		self::logger("[drag0n/php] Adding NODE_PATH: ".$_ENV['NODE_PATH']);
+		self::logger("[drag0n/php] Adding NODE_PATH: $dir/System/lib/node");
 		$script = escapeshellarg(
 			'do shell script "'
-			."sudo -E $dir/MacOS/node --harmony $dir/MacOS/d0GUI.js $opt >/dev/null 2>&1 &"
+			."sudo -E $dir/MacOS/node --harmony $dir/MacOS/d0GUI.js $opt $redirect"
 			.'" with administrator privileges'
 		);
 		self::logger("[Apple/osascript] Executing: $script");
-		exec("osascript -e $script");
+		system("osascript -e $script");
 	}
 	
 	public static function runWeb($uri) {

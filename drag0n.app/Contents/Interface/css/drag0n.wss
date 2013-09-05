@@ -23,6 +23,7 @@
 <?=WS($row)
 	->background->rgba(0,0,0, 0.7)
 	->padding(5, 2, 5, 2)
+	->text->align(left)
 ->end?>
 
 <?=WS($row.".large")
