@@ -7,7 +7,7 @@
 	<key>CFBundleExecutable</key>
 	<string>drag0n</string>
 	<key>CFBundleIconFile</key>
-	<string>TheIcon.icns</string>
+	<string>d0.icns</string>
 	<key>CFBundleIdentifier</key>
 	<string>com.drag0n.gui</string>
 	<key>CFBundleInfoDictionaryVersion</key>
