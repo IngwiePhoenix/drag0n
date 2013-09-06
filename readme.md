@@ -32,7 +32,7 @@ That's it. ^3^
 With a copy of drag0n, you get:
 
 - [PHP](http://php.net) 5.5.3
-    - [pthreads](https://github.com/bwoebi/pthreads) 0.45-rc
+    - [pthreads](https://github.com/krakjoe/pthreads) 0.45-rc
     - original headers!
 - [Yii](http://yiiframework.com) 1.1.14
 - [Spyc](https://github.com/tekimaki/spyc)
@@ -53,7 +53,7 @@ With a copy of drag0n, you get:
 
 Oh yes, you totally got this right.
 
-[@bwoebi](https://github.com/bwoebi) created the `pthreads` extension, that gives PHP coders three classes:
+[@krakjoe](https://github.com/krakjoe) created the `pthreads` extension, that gives PHP coders three classes:
 
 - Thread
 - Worker
@@ -144,6 +144,8 @@ Gimme feedback, PR's or whatever you would liek to give me :)
 
 [@tekimaki](https://github.com/tekimaki) : Thanks to Spyc, I now have a foolproof configuration file format. This is plain amazing!
 
-[@bwoebi](https://github.com/bwoebi) : pthreads is going to change the way I will be coding PHP in the future, dramatically. Thanks for helping me getting it to work! Keep up the great work!
+[@krakjoe](https://github.com/krakjoe) : pthreads is going to change the way I will be coding PHP in the future, dramatically. Thanks for helping me getting it to work! Keep up the great work!
 
 [@mstratman](https://github.com/mstratman) : CocoaDialog makes it possible to keep my users from staring into a terminal when I perform updates to the behind-the-scenes things. Great work there!
+
+[@bwoebi](https://github.com/bwoebi) : He contributed some patches so far, and is testing drag0n on a MacBook Pro with a Retina display - something I dont have right here :p That way I (or we in that case) can ensure that we'll be retina-ready at some point. :)
