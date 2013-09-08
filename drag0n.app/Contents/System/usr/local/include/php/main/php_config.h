@@ -244,6 +244,9 @@
 /* Whether to build wddx as dynamic module */
 /* #undef COMPILE_DL_WDDX */
 
+/* Whether to build wxwidgets as dynamic module */
+/* #undef COMPILE_DL_WXWIDGETS */
+
 /* Whether to build xml as dynamic module */
 /* #undef COMPILE_DL_XML */
 
@@ -522,7 +525,7 @@
 /* #undef HAVE_CLOCK_GET_TIME */
 
 /* Whether you have struct cmsghdr */
-/* #undef HAVE_CMSGHDR */
+#define HAVE_CMSGHDR 1
 
 /* */
 /* #undef HAVE_CODBC */
@@ -652,7 +655,7 @@
 /* #undef HAVE_EPOLL */
 
 /* Define to 1 if you have the <errno.h> header file. */
-/* #undef HAVE_ERRNO_H */
+#define HAVE_ERRNO_H 1
 
 /* */
 /* #undef HAVE_ESOOB */
@@ -838,7 +841,7 @@
 #define HAVE_HASH_EXT 1
 
 /* Define to 1 if you have the `hstrerror' function. */
-/* #undef HAVE_HSTRERROR */
+#define HAVE_HSTRERROR 1
 
 /* */
 #define HAVE_HTONL 1
@@ -868,10 +871,10 @@
 /* #undef HAVE_IEEEFP_H */
 
 /* Define to 1 if you have the `if_indextoname' function. */
-/* #undef HAVE_IF_INDEXTONAME */
+#define HAVE_IF_INDEXTONAME 1
 
 /* Define to 1 if you have the `if_nametoindex' function. */
-/* #undef HAVE_IF_NAMETOINDEX */
+#define HAVE_IF_NAMETOINDEX 1
 
 /* */
 /* #undef HAVE_IMAP */
@@ -1173,7 +1176,7 @@
 #define HAVE_NETINET_IN_H 1
 
 /* Define to 1 if you have the <netinet/tcp.h> header file. */
-/* #undef HAVE_NETINET_TCP_H */
+#define HAVE_NETINET_TCP_H 1
 
 /* Whether utf8_mime2text() has new signature */
 /* #undef HAVE_NEW_MIME2TEXT */
@@ -1455,7 +1458,7 @@
 /* #undef HAVE_SAPDB */
 
 /* Whether you have sockaddr_storage.ss_family */
-/* #undef HAVE_SA_SS_FAMILY */
+#define HAVE_SA_SS_FAMILY 1
 
 /* Define to 1 if you have the `scandir' function. */
 #define HAVE_SCANDIR 1
@@ -1572,7 +1575,7 @@
 #define HAVE_SOCKETPAIR 1
 
 /* */
-/* #undef HAVE_SOCKETS */
+#define HAVE_SOCKETS 1
 
 /* Whether you have socklen_t */
 #define HAVE_SOCKLEN_T 1
@@ -1838,7 +1841,7 @@
 #define HAVE_SYS_SOCKET_H 1
 
 /* Define to 1 if you have the <sys/sockio.h> header file. */
-/* #undef HAVE_SYS_SOCKIO_H */
+#define HAVE_SYS_SOCKIO_H 1
 
 /* Define to 1 if you have the <sys/statfs.h> header file. */
 /* #undef HAVE_SYS_STATFS_H */
@@ -1865,7 +1868,7 @@
 /* #undef HAVE_SYS_UIO_H */
 
 /* Define to 1 if you have the <sys/un.h> header file. */
-/* #undef HAVE_SYS_UN_H */
+#define HAVE_SYS_UN_H 1
 
 /* Define to 1 if you have the <sys/utsname.h> header file. */
 #define HAVE_SYS_UTSNAME_H 1
@@ -2122,7 +2125,7 @@
 #define PHP_BLOWFISH_CRYPT 1
 
 /* PHP build date */
-#define PHP_BUILD_DATE "2013-09-04"
+#define PHP_BUILD_DATE "2013-09-08"
 
 /* Define if your system has fork/vfork/CreateProcess */
 #define PHP_CAN_SUPPORT_PROC_OPEN 1
@@ -2336,6 +2339,9 @@
 
 /* */
 /* #undef USE_TRANSFER_TABLES */
+
+/* Include debugging support in wxPHP */
+/* #undef USE_WXPHP_DEBUG */
 
 /* whether you want Pi3Web support */
 /* #undef WITH_PI3WEB */

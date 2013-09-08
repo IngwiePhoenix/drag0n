@@ -16,9 +16,6 @@
  * @link       http://pear.php.net/package/PEAR
  */
 
-// drag0n-php55-st modification
-$__LIBDIR__ = dirname(__FILE__);
-
 ob_end_clean();
 if (!defined('PEAR_RUNTYPE')) {
     // this is defined in peclcmd.php as 'pecl'
@@ -28,8 +25,8 @@ define('PEAR_IGNORE_BACKTRACE', 1);
 /**
  * @nodep Gtk
  */
-if ($__LIBDIR__ != '@'.'include_path'.'@') {
-    ini_set('include_path', $__LIBDIR__);
+if ('/Applications/drag0n/drag0n.app/Contents/System/lib/php' != '@'.'include_path'.'@') {
+    ini_set('include_path', '/Applications/drag0n/drag0n.app/Contents/System/lib/php');
     $raw = false;
 } else {
     // this is a raw, uninstalled pear, either a cvs checkout, or php distro

@@ -18,7 +18,7 @@
 
 /* $Id$ */
 
-#define CONFIGURE_COMMAND " './configure'  '--prefix=/Applications/drag0n/drag0n.app/Contents/System' '--enable-embed=static' '--enable-static=yes' '--with-config-file-path=' '--with-config-file-scan-dir=' '--enable-maintainer-zts' '--enable-pthreads' '--enable-mbstring' '--enable-ftp' '--enable-zip' '--enable-opcache' '--with-tidy' '--with-mcrypt' '--with-gd' '--with-pear' '--with-libedit' '--with-curl' '--enable-intl' '--enable-soap' '--enable-libxml'"
+#define CONFIGURE_COMMAND " './configure'  '--prefix=/Applications/drag0n/drag0n.app/Contents/System' '--bindir=/Applications/drag0n/drag0n.app/Contents/System/bin' '--sbindir=/Applications/drag0n/drag0n.app/Contents/System/usr/sbin' '--libexecdir=/Applications/drag0n/drag0n.app/Contents/System/usr/local/libexec' '--sysconfdir=/Applications/drag0n/drag0n.app/Contents/System/etc' '--sharedstatedir=/Applications/drag0n/drag0n.app/Contents/System/usr/com' '--localstatedir=/Applications/drag0n/drag0n.app/Contents/System/var' '--libdir=/Applications/drag0n/drag0n.app/Contents/System/lib' '--includedir=/Applications/drag0n/drag0n.app/Contents/System/include' '--oldincludedir=/Applications/drag0n/drag0n.app/Contents/System/local/include' '--datarootdir=/Applications/drag0n/drag0n.app/Contents/System/usr/local/share' '--infodir=/Applications/drag0n/drag0n.app/Contents/System/usr/local/share/info' '--localedir=/Applications/drag0n/drag0n.app/Contents/System/usr/local/share/locale' '--mandir=/Applications/drag0n/drag0n.app/Contents/System/usr/local/share/man' '--docdir=/Applications/drag0n/drag0n.app/Contents/System/doc/plain' '--htmldir=/Applications/drag0n/drag0n.app/Contents/System/doc/html' '--dvidir=/Applications/drag0n/drag0n.app/Contents/System/doc/dvi' '--pdfdir=/Applications/drag0n/drag0n.app/Contents/System/doc/pdf' '--psdir=/Applications/drag0n/drag0n.app/Contents/System/doc/ps' '--enable-embed=static' '--enable-static=yes' '--with-config-file-path=' '--with-config-file-scan-dir=' '--enable-maintainer-zts' '--enable-pthreads' '--enable-mbstring' '--enable-sockets' '--enable-ftp' '--enable-zip' '--enable-opcache' '--with-tidy' '--with-mcrypt' '--with-gd' '--with-pear' '--with-libedit' '--with-curl' '--enable-intl' '--enable-soap' '--enable-libxml'"
 #define PHP_ADA_INCLUDE		""
 #define PHP_ADA_LFLAGS		""
 #define PHP_ADA_LIBS		""
@@ -77,13 +77,13 @@
 #define PHP_BIRDSTEP_LIBS        ""
 #define PEAR_INSTALLDIR         "/Applications/drag0n/drag0n.app/Contents/System/lib/php"
 #define PHP_INCLUDE_PATH	".:/Applications/drag0n/drag0n.app/Contents/System/lib/php"
-#define PHP_EXTENSION_DIR       "/Applications/drag0n/drag0n.app/Contents/System/lib/php/extensions/no-debug-zts-20121212"
+#define PHP_EXTENSION_DIR       "/Applications/drag0n/drag0n.app/Contents/System/lib/extensions/no-debug-zts-20121212"
 #define PHP_PREFIX              "/Applications/drag0n/drag0n.app/Contents/System"
 #define PHP_BINDIR              "/Applications/drag0n/drag0n.app/Contents/System/bin"
-#define PHP_SBINDIR             "/Applications/drag0n/drag0n.app/Contents/System/sbin"
-#define PHP_MANDIR              "/Applications/drag0n/drag0n.app/Contents/System/php/man"
-#define PHP_LIBDIR              "/Applications/drag0n/drag0n.app/Contents/System/lib/php"
-#define PHP_DATADIR             "${prefix}/share"
+#define PHP_SBINDIR             "/Applications/drag0n/drag0n.app/Contents/System/usr/sbin"
+#define PHP_MANDIR              "/Applications/drag0n/drag0n.app/Contents/System/usr/local/share/man"
+#define PHP_LIBDIR              "/Applications/drag0n/drag0n.app/Contents/System/lib"
+#define PHP_DATADIR             "/Applications/drag0n/drag0n.app/Contents/System/usr/local/share"
 #define PHP_SYSCONFDIR          "/Applications/drag0n/drag0n.app/Contents/System/etc"
 #define PHP_LOCALSTATEDIR       "/Applications/drag0n/drag0n.app/Contents/System/var"
 #define PHP_CONFIG_FILE_PATH    ""

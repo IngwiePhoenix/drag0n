@@ -19,8 +19,8 @@
 /**
  * @nodep Gtk
  */
-if ('/Application/drag0n/lib/php' != '@'.'include_path'.'@') {
-    ini_set('include_path', '/Application/drag0n/lib/php');
+if ('/Applications/drag0n/drag0n.app/Contents/System/lib/php' != '@'.'include_path'.'@') {
+    ini_set('include_path', '/Applications/drag0n/drag0n.app/Contents/System/lib/php');
     $raw = false;
 } else {
     // this is a raw, uninstalled pear, either a cvs checkout, or php distro

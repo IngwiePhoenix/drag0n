@@ -1,34 +1,28 @@
 #!/bin/sh
 
-# drag0n-php55-s modification
-SYS=$(dirname "$0")"/.."
-PHP="$SYS/bin/php"
-INCDIR="$SYS/lib/php"
-INCARG="-d include_path=$INCDIR"
-
 # first find which PHP binary to use
-#if test "x$PHP_PEAR_PHP_BIN" != "x"; then
-#  PHP="$PHP_PEAR_PHP_BIN"
-#else
-#  if test "/Application/drag0n/bin/php" = '@'php_bin'@'; then
-#    PHP=php
-#  else
-#    PHP="/Application/drag0n/bin/php"
-#  fi
-#fi
+if test "x$PHP_PEAR_PHP_BIN" != "x"; then
+  PHP="$PHP_PEAR_PHP_BIN"
+else
+  if test "/Applications/drag0n/drag0n.app/Contents/System/bin/php" = '@'php_bin'@'; then
+    PHP=php
+  else
+    PHP="/Applications/drag0n/drag0n.app/Contents/System/bin/php"
+  fi
+fi
 
 # then look for the right pear include dir
-#if test "x$PHP_PEAR_INSTALL_DIR" != "x"; then
-#  INCDIR=$PHP_PEAR_INSTALL_DIR
-#  INCARG="-d include_path=$PHP_PEAR_INSTALL_DIR"
-#else
-#  if test "/Application/drag0n/lib/php" = '@'php_dir'@'; then
-#    INCDIR=`dirname $0`
-#    INCARG=""
-#  else
-#    INCDIR="/Application/drag0n/lib/php"
-#    INCARG="-d include_path=/Application/drag0n/lib/php"
-#  fi
-#fi
+if test "x$PHP_PEAR_INSTALL_DIR" != "x"; then
+  INCDIR=$PHP_PEAR_INSTALL_DIR
+  INCARG="-d include_path=$PHP_PEAR_INSTALL_DIR"
+else
+  if test "/Applications/drag0n/drag0n.app/Contents/System/lib/php" = '@'php_dir'@'; then
+    INCDIR=`dirname $0`
+    INCARG=""
+  else
+    INCDIR="/Applications/drag0n/drag0n.app/Contents/System/lib/php"
+    INCARG="-d include_path=/Applications/drag0n/drag0n.app/Contents/System/lib/php"
+  fi
+fi
 
 exec $PHP -C -q $INCARG -d date.timezone=UTC -d output_buffering=1 -d variables_order=EGPCS -d open_basedir="" -d safe_mode=0 -d register_argc_argv="On" -d auto_prepend_file="" -d auto_append_file="" $INCDIR/pearcmd.php "$@"
