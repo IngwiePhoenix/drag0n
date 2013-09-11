@@ -88,6 +88,9 @@
 /* Whether to build gmp as dynamic module */
 /* #undef COMPILE_DL_GMP */
 
+/* Whether to build gnupg as dynamic module */
+/* #undef COMPILE_DL_GNUPG */
+
 /* Whether to build hash as dynamic module */
 /* #undef COMPILE_DL_HASH */
 
@@ -377,6 +380,9 @@
 
 /* */
 /* #undef GDBM_INCLUDE_FILE */
+
+/* Path to gpg v1.x */
+/* #undef GNUPG_PATH */
 
 /* Whether you use GNU Pth */
 /* #undef GNUPTH */
@@ -833,6 +839,9 @@
 
 /* Define to 1 if you have the `gmtime_r' function. */
 #define HAVE_GMTIME_R 1
+
+/* */
+/* #undef HAVE_GNUPGLIB */
 
 /* Define to 1 if you have the `grantpt' function. */
 #define HAVE_GRANTPT 1
