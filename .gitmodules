@@ -1,3 +1,6 @@
 [submodule "drag0n.app/Contents/Library/WingStyle"]
 	path = drag0n.app/Contents/Library/WingStyle
 	url = https://github.com/IngwiePhoenix/WingStyle.git
+[submodule "drag0n.app/Contents/Application/components/Spyc"]
+	path = drag0n.app/Contents/Application/components/Spyc
+	url = https://github.com/tekimaki/spyc.git

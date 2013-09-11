@@ -220,6 +220,9 @@
 /* Whether to build sqlite3 as dynamic module */
 /* #undef COMPILE_DL_SQLITE3 */
 
+/* Whether to build ssh2 as dynamic module */
+/* #undef COMPILE_DL_SSH2 */
+
 /* Whether to build standard as dynamic module */
 /* #undef COMPILE_DL_STANDARD */
 
@@ -1625,6 +1628,9 @@
 /* Define to 1 if you have the `srandom' function. */
 #define HAVE_SRANDOM 1
 
+/* Have libssh2 */
+#define HAVE_SSH2LIB 1
+
 /* Whether ssize_t is available */
 #define HAVE_SSIZE_T 1
 
@@ -2125,7 +2131,7 @@
 #define PHP_BLOWFISH_CRYPT 1
 
 /* PHP build date */
-#define PHP_BUILD_DATE "2013-09-08"
+#define PHP_BUILD_DATE "2013-09-11"
 
 /* Define if your system has fork/vfork/CreateProcess */
 #define PHP_CAN_SUPPORT_PROC_OPEN 1
@@ -2195,6 +2201,12 @@
 
 /* */
 #define PHP_SIGCHILD 0
+
+/* Have libssh2 with ssh-agent support */
+#define PHP_SSH2_AGENT_AUTH 1
+
+/* Have libssh2 with session timeout support */
+#define PHP_SSH2_SESSION_TIMEOUT 1
 
 /* Whether the system supports standard DES salt */
 #define PHP_STD_DES_CRYPT 1
