@@ -4,7 +4,7 @@
 prefix='/Applications/drag0n/drag0n.app/Contents/System'
 datarootdir='/Applications/drag0n/drag0n.app/Contents/System/php'
 exec_prefix="`eval echo ${prefix}`"
-phpdir="`eval echo /Applications/drag0n/drag0n.app/Contents/System/lib`/build"
+phpdir="`eval echo /Applications/drag0n/drag0n.app/Contents/System/usr/local/lib`/build"
 includedir="`eval echo /Applications/drag0n/drag0n.app/Contents/System/usr/local/include`/php"
 builddir="`pwd`"
 SED="/usr/bin/sed"

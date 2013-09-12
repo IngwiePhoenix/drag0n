@@ -382,7 +382,7 @@
 /* #undef GDBM_INCLUDE_FILE */
 
 /* Path to gpg v1.x */
-/* #undef GNUPG_PATH */
+#define GNUPG_PATH "/usr/local/bin/gpg"
 
 /* Whether you use GNU Pth */
 /* #undef GNUPTH */
@@ -841,7 +841,7 @@
 #define HAVE_GMTIME_R 1
 
 /* */
-/* #undef HAVE_GNUPGLIB */
+#define HAVE_GNUPGLIB 1
 
 /* Define to 1 if you have the `grantpt' function. */
 #define HAVE_GRANTPT 1
@@ -2140,7 +2140,7 @@
 #define PHP_BLOWFISH_CRYPT 1
 
 /* PHP build date */
-#define PHP_BUILD_DATE "2013-09-11"
+#define PHP_BUILD_DATE "2013-09-12"
 
 /* Define if your system has fork/vfork/CreateProcess */
 #define PHP_CAN_SUPPORT_PROC_OPEN 1
