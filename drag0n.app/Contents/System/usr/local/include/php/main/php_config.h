@@ -468,7 +468,7 @@
 /* #undef HAVE_BCMATH */
 
 /* */
-/* #undef HAVE_BCOMPILER */
+#define HAVE_BCOMPILER 1
 
 /* */
 /* #undef HAVE_BIND_TEXTDOMAIN_CODESET */
@@ -2140,7 +2140,7 @@
 #define PHP_BLOWFISH_CRYPT 1
 
 /* PHP build date */
-#define PHP_BUILD_DATE "2013-09-12"
+#define PHP_BUILD_DATE "2013-09-13"
 
 /* Define if your system has fork/vfork/CreateProcess */
 #define PHP_CAN_SUPPORT_PROC_OPEN 1
