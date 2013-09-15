@@ -6,7 +6,7 @@
 		<?php Yii::app()->clientScript->registerMetaTag('text/html; charset=utf-8',null, 'Content-type'); ?>
 		<?php Yii::app()->clientScript->registerScriptFile(Yii::app()->theme->baseUrl."/js/classie.js",CClientScript::POS_HEAD); ?>
 		<?php Yii::app()->clientScript->registerScriptFile(Yii::app()->theme->baseUrl."/js/modernizr.custom.js",CClientScript::POS_HEAD); ?>
-		<?php Yii::app()->clientScript->registerScriptFile(Yii::app()->theme->baseUrl."/js/console.js",CClientScript::POS_HEAD); ?>
+		<?php Yii::app()->clientScript->registerScriptFile(Yii::app()->theme->baseUrl."/js/jquery.terminal-0.7.6.js",CClientScript::POS_HEAD); ?>
 		<?php Yii::app()->clientScript->registerCoreScript("jquery"); ?>
 	</head>
 	<body class="cbp-spmenu-push" oncontextmenu="return false;">
@@ -72,6 +72,15 @@
 				args = ['-r', '"echo json_encode(array(\'type\'=>\'success\', \'who\'=>\'FooBar\', \'what\'=>\'IT WORKS.\'));"'];
 				run(file, args);
 			}
+			function terminal() {
+				$('#console').terminal(function(input, terminal) {
+       				terminal.echo("Command: "+input);
+    			}, {
+        			greetings: 'drag0n console',
+        			name: 'd0',
+        			prompt: 'drag0n> '
+        		});
+			}
 			function listeners() {
 				console.debug("js/listeners","Setting up listeners.");
 				$("#main").click(function(e){removeAll("x");});
@@ -134,7 +143,28 @@
 					classie.toggle( menuBottom, 'cbp-spmenu-open' );
 				};
 			}
-			jQuery(listeners);
+			jQuery(function(){
+				terminal();
+				if (typeof console  != "undefined") {
+    				if (typeof console.log != 'undefined')
+        				console.olog = console.log;
+    				else
+        				console.olog = function() {};
+        		}
+
+				console.insert = function(cs, message) {
+    				console.olog(message);
+					$('#console').terminal().echo("[[;;;"+cs+"]"+message+"]");
+    				var objDiv = document.getElementById("console");
+					objDiv.scrollTop = objDiv.scrollHeight;
+				};
+				console.log = function(who, msg) { console.insert("status", "["+who+"] "+msg); }
+				console.debug = function(who, msg) { console.insert("debug", "["+who+"] "+msg); }
+				console.error = function(who, msg) { console.insert("error", "["+who+"] "+msg); }
+				console.success = function(who, msg) { console.insert("success", "["+who+"] "+msg); }
+				console.cmd = function(msg) { console.insert("cmd", msg); }
+				listeners(); 
+			});
 			function run(prog, args) { return runCmd(prog, args, self); }
 		</script>
 	</body>

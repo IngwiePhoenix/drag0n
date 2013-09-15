@@ -163,24 +163,35 @@
 	->userSelect(text)
 ->end?>
 
-<? $console = "#console div."; ?>
-<?=WS($console."status")
+<?=WS(".cursor")
+	->width(5)
+	->background->color(lime)
+->end?>
+<?=WS(".cursor.inverted")
+	->background->color(transparent)
+->end?>
+<?=WS(".clipboard")
+	->display(none)
+->end?>
+
+
+<?=WS(".status")
 	->font->weight(bold)
 ->end?>
 
-<?=WS($console."error")
+<?=WS(".error")
 	->color(red)
 ->end?>
 
-<?=WS($console."cmd")
+<?=WS(".cmd")
 	->font->weight(silver)
 ->end?>
 
-<?=WS($console."success")
+<?=WS(".success")
 	->color(lime)
 	->font->weight(bold)
 ->end?>
 
-<?=WS($console."debug")
+<?=WS(".debug")
 	->font->style(italic)
 ->end?>
