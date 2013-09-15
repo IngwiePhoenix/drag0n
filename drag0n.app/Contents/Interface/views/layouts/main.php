@@ -4,11 +4,11 @@
 		<title><?=CHtml::encode($this->pageTitle)?></title>
 		<link rel="stylesheet" type="text/css" href="<?=Yii::app()->theme->baseUrl?>/css/NewDrag0n.css" />
 		<?php Yii::app()->clientScript->registerMetaTag('text/html; charset=utf-8',null, 'Content-type'); ?>
-		<?php Yii::app()->clientScript->registerScriptFile(Yii::app()->theme->baseUrl."/js/classie.js",CClientScript::POS_HEAD); ?>
-		<?php Yii::app()->clientScript->registerScriptFile(Yii::app()->theme->baseUrl."/js/modernizr.custom.js",CClientScript::POS_HEAD); ?>
-		<?php Yii::app()->clientScript->registerScriptFile(Yii::app()->theme->baseUrl."/js/jquery.terminal-0.7.6.js",CClientScript::POS_HEAD); ?>
+		<?php Yii::app()->clientScript->registerScriptFile(Yii::app()->theme->baseUrl."/js/classie.js", CClientScript::POS_HEAD); ?>
+		<?php Yii::app()->clientScript->registerScriptFile(Yii::app()->theme->baseUrl."/js/modernizr.custom.js", CClientScript::POS_HEAD); ?>
+		<?php Yii::app()->clientScript->registerScriptFile(Yii::app()->theme->baseUrl."/js/jquery.terminal-0.7.6.js", CClientScript::POS_HEAD); ?>
 		<?php Yii::app()->clientScript->registerCoreScript("jquery"); ?>
-		<?php Yii::app()->clientScript->registerScriptFile(Yii::app()->theme->baseUrl."/js/backend.js",CClientScript::POS_HEAD); ?>
+		<?php Yii::app()->clientScript->registerScriptFile(Yii::app()->theme->baseUrl."/js/backend.js", CClientScript::POS_HEAD); ?>
 	</head>
 	<body class="cbp-spmenu-push" oncontextmenu="return false;">
 		<!-- left -->
