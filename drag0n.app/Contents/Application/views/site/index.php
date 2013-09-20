@@ -10,5 +10,5 @@
 	<br>
 	Explore the features you see here and have a lot of fun with them. Further updates will include better and new options.
 	<hr>
-	<pre><?php print_r($_ENV); ?></pre>
+	<pre><?php print_r(SpycObject(Yii::app()->Apple->getAppsString())); ?></pre>
 </div>

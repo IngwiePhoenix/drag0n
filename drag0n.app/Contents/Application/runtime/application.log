@@ -1,0 +1,16 @@
+2013/09/15 18:03:43 [error] [php] Invalid argument supplied for foreach() (/Applications/drag0n/drag0n.app/Contents/Application/views/site/list.php:4)
+Stack trace:
+#0 /Applications/drag0n/drag0n.app/Contents/Frameworks/yii.framework/Resources/web/CController.php(870): SiteController->renderFile()
+#1 /Applications/drag0n/drag0n.app/Contents/Application/controllers/SiteController.php(23): SiteController->renderPartial()
+#2 /Applications/drag0n/drag0n.app/Contents/Frameworks/yii.framework/Resources/web/actions/CInlineAction.php(50): SiteController->actionList()
+#3 /Applications/drag0n/drag0n.app/Contents/Frameworks/yii.framework/Resources/web/CController.php(309): CInlineAction->runWithParams()
+#4 /Applications/drag0n/drag0n.app/Contents/Frameworks/yii.framework/Resources/web/CController.php(287): SiteController->runAction()
+#5 /Applications/drag0n/drag0n.app/Contents/Frameworks/yii.framework/Resources/web/CController.php(266): SiteController->runActionWithFilters()
+#6 /Applications/drag0n/drag0n.app/Contents/Frameworks/yii.framework/Resources/web/CWebApplication.php(283): SiteController->run()
+#7 /Applications/drag0n/drag0n.app/Contents/Frameworks/yii.framework/Resources/web/CWebApplication.php(142): CWebApplication->runController()
+#8 /Applications/drag0n/drag0n.app/Contents/Frameworks/yii.framework/Resources/base/CApplication.php(162): CWebApplication->processRequest()
+#9 /Applications/drag0n/drag0n.app/Contents/MacOS/drag0n(93): CWebApplication->run()
+#10 /Applications/drag0n/drag0n.app/Contents/MacOS/drag0n(41): runWeb()
+#11 /Applications/drag0n/drag0n.app/Contents/MacOS/drag0n(97): main()
+#12 /Applications/drag0n/drag0n.app/Contents/MacOS/d0GUI.php(1): include()
+REQUEST_URI=http://appjs/MacOS/d0GUI.php

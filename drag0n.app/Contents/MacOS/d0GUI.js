@@ -82,21 +82,20 @@ var phpRouter = function router(request, response, next){
 			for(var _e in process.env) { env[_e] = process.env[_e]; }
 			env.TERM="dumb";
 			
-			console.log("PHP environment:", env);
-
-			$PHP = spawn(exe, ["-n", MAIN+url.substring(1)], {'env':env});
+			$PHP = spawn(exe, [MAIN+url.substring(1)], {'env':env});
 			var allData = "";
 			var code = 200;
 			$PHP.stdout.on('data',function(data) {
 				allData += data;
 			});
 			$PHP.stderr.on("data",function(data) {
+				console.log("ERROR-DATA: "+allData);
 				console.log("[Error]: "+data);
-				fs.appendFile(
+				/*fs.appendFile(
 					MAIN+"/Logs/PHP.stderr", 
 					"[Error]: "+data+"\n", 
-					function(e){/* avoid force-quitting the app */}
-				);
+					function(e){/* avoid force-quitting the app /}
+				);*/
 				code = 500;
 			});
 			$PHP.stdout.on('end',function() {
@@ -110,8 +109,13 @@ var phpRouter = function router(request, response, next){
 				*/
 				var allArray = allData.split("\n");
 				allArray.splice(0,4);
-				allData = allArray.join("\n").trim();
+				allData = allArray.join("\n");
+				/*response.writeHead(code, {
+					'Content-Length': allData.byteLength,
+  					'Content-Type': mimetype
+  				});*/
 				response.send(code,mimetype,allData);
+	console.log("Response send.");
 			});
 		} else {
 			//alternative is to call next() and let another router handle normal files.

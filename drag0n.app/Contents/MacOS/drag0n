@@ -93,5 +93,7 @@ class drag0n {
 		Yii::createWebApplication($config)->run();
 	}
 }
-
+ini_set("memory_limit","265M");
+ini_set("log_errors","on");
+ini_set("post_max_size","16M");
 drag0n::main($argc, $argv);

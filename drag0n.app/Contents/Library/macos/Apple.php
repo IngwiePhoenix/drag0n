@@ -87,5 +87,9 @@
 		}
 		return $folders;
 	}
+	
+	public function getAppsString() {
+		return shell_exec("/usr/sbin/system_profiler SPApplicationsDataType");
+	}
 
 } ?>

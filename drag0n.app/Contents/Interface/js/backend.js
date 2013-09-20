@@ -18,6 +18,9 @@ function terminal() {
 			case "js":
 				eval(args.join(" "));
 				break;
+			default:
+				run(type, args);
+				break;
 		}
     }, {
         greetings: "drag0n console. Use 'd0' to access drag0n functions, 'php' to run PHP code, 'js' to run javascript code.",
@@ -33,8 +36,9 @@ function listeners() {
 		document.body.style.cursor = "wait";
 		href=$(this).attr("href")+"&ajax=true";
 		$.get(href,function(d){
-			$main = $(d).find("#main");
-			if($main && $main.length===1) { $v = $($main[0]).html(); }	else { $v = d; }
+			//$main = $(d).find("#main");
+			//if($main && $main.length===1) { $v = $($main[0]).html(); }	else { $v = d; }
+			$v=d;
 			console.log($v);
 			$("#main").html($v);
 			listeners();
@@ -94,7 +98,7 @@ jQuery(function(){
         	console.olog = console.log;
     	else
         	console.olog = function() {};
-        }
+    }
 
 	console.insert = function(cs, message) {
     	console.olog(message);
