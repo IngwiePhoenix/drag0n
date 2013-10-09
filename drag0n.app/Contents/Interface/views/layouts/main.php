@@ -10,7 +10,8 @@
 		<?php Yii::app()->clientScript->registerCoreScript("jquery"); ?>
 		<?php Yii::app()->clientScript->registerScriptFile(Yii::app()->theme->baseUrl."/js/backend.js", CClientScript::POS_HEAD); ?>
 	</head>
-	<body class="cbp-spmenu-push" oncontextmenu="return false;">
+	<!--<body class="cbp-spmenu-push" oncontextmenu="return false;">-->
+	<body class="cbp-spmenu-push">
 		<!-- left -->
 		<nav class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-left" id="cbp-spmenu-s1">
 			<h3>Search</h3>
