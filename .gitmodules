@@ -4,3 +4,6 @@
 [submodule "drag0n.app/Contents/Resources/components/Spyc"]
 	path = drag0n.app/Contents/Resources/components/Spyc
 	url = https://github.com/tekimaki/spyc.git
+[submodule "drag0n.app/Contents/System/lib/php/phpws"]
+	path = drag0n.app/Contents/System/lib/php/phpws
+	url = https://github.com/Devristo/phpws.git
