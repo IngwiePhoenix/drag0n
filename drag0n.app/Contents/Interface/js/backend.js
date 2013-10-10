@@ -36,10 +36,17 @@ function listeners() {
 		document.body.style.cursor = "wait";
 		href=$(this).attr("href")+"&ajax=true";
 		$.get(href,function(d){
-			//$main = $(d).find("#main");
-			//if($main && $main.length===1) { $v = $($main[0]).html(); }	else { $v = d; }
-			$v=d;
-			console.log($v);
+			console.log("AJAX",d);
+			$main = $(d).find("#main");
+			if($main && $main.length===1) { 
+				$v = $($main[0]).html(); 
+			} else {
+				if(typeof d.documentElement != "undefined") {
+					$v = d.documentElement;
+				} else {
+					$v = d;
+				}
+			}
 			$("#main").html($v);
 			listeners();
 			removeAll("x");
@@ -100,13 +107,14 @@ jQuery(function(){
         	console.olog = function() {};
     }
 
-	console.insert = function(cs, message) {
-    	console.olog(message);
+	console.insert = function(cs, message, third) {
+		if(typeof third == "undefined") third = "";
+    	console.olog(message, third);
 		$('#console').terminal().echo("[[;;;"+cs+"]"+$.terminal.escape_brackets(message)+"]", "raw");
     	var objDiv = document.getElementById("console");
 		objDiv.scrollTop = objDiv.scrollHeight;
 	};
-	console.log = function(who, msg) { console.insert("status", "{"+who+"} "+msg); }
+	console.log = function(who, msg) { console.insert("status", "{"+who+"} ",msg); }
 	console.debug = function(who, msg) { console.insert("debug", "{"+who+"} "+msg); }
 	console.error = function(who, msg) { console.insert("error", "{"+who+"} "+msg); }
 	console.success = function(who, msg) { console.insert("success", "{"+who+"} "+msg); }

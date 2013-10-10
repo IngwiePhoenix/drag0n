@@ -87,7 +87,10 @@ class Request {
 		$file = realpath($path);
 		$realFile=null;
 		$code=200;
+		$qarr = explode("&", $_SERVER['QUERY_STRING']);
+		$qst = implode(" ", $qarr); 
 		fwrite($WebServer->out, "[PHP-HTTP] GET $uri | $path\n");
+		fwrite($WebServer->out, "[PHP-HTTP] QUERY $qst\n");
 		if($file) {
 			fwrite($WebServer->out, "[PHP-HTTP] Trying to load $path\n");
 			$realFile=$file;
@@ -101,8 +104,10 @@ class Request {
 		list($type, $stype)=explode("/",$mt);
 		if($type == "text") {
 			$out = shell_exec(implode(" ",[
-				escapeshellcmd(PHP_BINARY."-cgi"), "-q",
-				escapeshellarg($realFile)
+				escapeshellcmd(PHP_BINARY."-cgi"), 
+				"-q",
+				escapeshellarg($realFile),
+				$qst
 			]));
 			echo $out;
 		} else {
@@ -197,6 +202,10 @@ class Browser extends Thread {
 					$this->server->pop(); # Tell the server to shut down. To do this...we cause a SegFault. Looking for better solution.
 					exit(0); 
 					break;
+				}
+				
+				if($o->method == "Console.messageAdded") {
+					echo "[Browser console] ".$o->params->message->text."\n";
 				}
 			}
 			
