@@ -1,14 +1,5 @@
 #!/usr/bin/php
 <?php
-/*
-#!/bin/bash
-echo "Launching wrapper..."
-ME=$(dirname "$0")
-cd $ME/..
-export NODE_PATH=""
-"$ME/../System/bin/php" "$ME/../System/bin/desk_parse" ${*:1}
-exit 0
-*/
 
 // Hackery: Restart self with the other PHP if the original PHP is lower than 5.5
 list($vMajor, $vMinor, $vRelease) = explode(".",phpversion());
@@ -50,16 +41,7 @@ class drag0n {
 				: null 
 			)
 		);
-		if(!is_null($key))
-			$opt = $options[$key];
-		else 
-			$opt = null;
-
-		self::runApp($argc, $argv, $opt, $debug);
-	}
-
-	public static function runApp($argc, array $argv, $opt) {
-		if(!is_null($opt)) putenv("_DRGN=$opt");
+		if(!is_null($key)) putenv("_DRGN=$opt");
 				
 		$dir = realpath( dirname($argv[0])."/.." );
 		self::logger("[drag0n/php] Working folder is now: $dir");
@@ -72,7 +54,7 @@ class drag0n {
 			"version"=>"0.2-DSK",
 			"author"=>"IngwiePhoenix",
 			"description"=>"drag0n Installer interface",
-			"main"=>__FILE__,
+			"main"=>"Resources/script",
 			"licence"=>"Unknown",
 			"frontend"=>"chromium-portable",
 			"backend"=>"php-cgi",

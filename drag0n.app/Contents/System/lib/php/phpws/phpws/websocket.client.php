@@ -212,6 +212,8 @@ class WebSocket implements WebSocketObserver
     public function readFrame()
     {
         $buffer = fread($this->socket, 8192);
+        
+        if(is_null($this->_frames)) $this->_frames=array();
 
         $this->_frames = array_merge($this->_frames, $this->_connection->readFrame($buffer));
 

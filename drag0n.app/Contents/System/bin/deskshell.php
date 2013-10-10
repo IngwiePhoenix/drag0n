@@ -96,17 +96,17 @@ class Request {
 			$realFile=Contents."/errdoc/404.html";
 			$code=404;
 		}
-		$mt = mime_content_type($file);
+		$mt = mime_content_type($realFile);
 		fwrite($WebServer->out, "[PHP-HTTP] Mime-Type: $mt\n");
 		list($type, $stype)=explode("/",$mt);
 		if($type == "text") {
 			$out = shell_exec(implode(" ",[
 				escapeshellcmd(PHP_BINARY."-cgi"), "-q",
-				escapeshellarg($file)
+				escapeshellarg($realFile)
 			]));
 			echo $out;
 		} else {
-			echo file_get_contents($file);
+			echo file_get_contents($realFile);
 		}
 		return $code;
 	}
