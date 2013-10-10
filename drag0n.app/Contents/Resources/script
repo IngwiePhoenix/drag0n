@@ -1,0 +1,96 @@
+#!/usr/bin/php
+<?php
+/*
+#!/bin/bash
+echo "Launching wrapper..."
+ME=$(dirname "$0")
+cd $ME/..
+export NODE_PATH=""
+"$ME/../System/bin/php" "$ME/../System/bin/desk_parse" ${*:1}
+exit 0
+*/
+
+// Hackery: Restart self with the other PHP if the original PHP is lower than 5.5
+list($vMajor, $vMinor, $vRelease) = explode(".",phpversion());
+if($vMinor < 5) {
+	echo "[drag0n] Relaunch into php 5.5.3...\n";
+	$php = escapeshellcmd( realpath(dirname(__FILE__))."/../System/bin/php" );
+	$me = escapeshellarg(__FILE__);
+	system("$php $me");
+	exit(0);
+} else {
+	// Set proc-title
+	cli_set_process_title("drag0n");
+	define("Contents",dirname(__FILE__)."/..");
+	echo "[drag0n/php] Relaunch complete.\n";
+}
+
+class drag0n {
+
+	public static $longopts = array("appjs", "uri:", "debug");
+	public static $shortopts = "au:";
+
+	public static function logger($msg) {
+		static $stderr;
+		if (!is_resource($stderr))
+			$stderr = fopen("php://stderr", "w");
+		fwrite($stderr, $msg."\n");
+	}
+
+	public static function main($argc, $argv) {
+		$_ENV += $_SERVER; // $_ENV isn't always populated 
+
+		$options = getopt(self::$shortopts, self::$longopts);
+
+		// Quick, a key!
+		$key = ( isset($options["uri"]) 
+			? "uri" 
+			: ( isset($options["u"]) 
+				? "u" 
+				: null 
+			)
+		);
+		if(!is_null($key))
+			$opt = $options[$key];
+		else 
+			$opt = null;
+
+		self::runApp($argc, $argv, $opt, $debug);
+	}
+
+	public static function runApp($argc, array $argv, $opt) {
+		if(!is_null($opt)) putenv("_DRGN=$opt");
+				
+		$dir = realpath( dirname($argv[0])."/.." );
+		self::logger("[drag0n/php] Working folder is now: $dir");
+		putenv("NODE_PATH=$dir/System/lib/node");
+		self::logger("[drag0n/php] Adding NODE_PATH: $dir/System/lib/node");
+		
+		// Quickly build a JSON object
+		$desk = json_decode(json_encode(array(
+			"name"=>"drag0n",
+			"version"=>"0.2-DSK",
+			"author"=>"IngwiePhoenix",
+			"description"=>"drag0n Installer interface",
+			"main"=>__FILE__,
+			"licence"=>"Unknown",
+			"frontend"=>"chromium-portable",
+			"backend"=>"php-cgi",
+			"defaultLocation"=>"Resources/gui.php",
+			"mode"=>"app",
+			"width"=>1024,
+			"height"=>640,
+			"htdocs"=>"/"
+		)));
+		$appDir = realpath(dirname(__file__)."/..");
+
+		// Bring in Deskshell
+		include_once dirname(__FILE__)."/../System/bin/Deskshell.php";
+		Deskshell::main($desk, $appDir);
+		exit(0);
+	}
+}
+ini_set("memory_limit","265M");
+ini_set("log_errors","on");
+ini_set("post_max_size","16M");
+drag0n::main($argc, $argv);

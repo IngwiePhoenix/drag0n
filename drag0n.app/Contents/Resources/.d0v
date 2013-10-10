@@ -1,0 +1,222 @@
+---
+name: drag0n GUI
+version: 0.2b
+id: d0.gui
+author:
+  name: Ingwie Phoenix
+  email: ingwie2000@gmail.com
+files:
+  - commands
+  - commands/shell
+  - components
+  - components/Controller.php
+  - components/Installed.yml
+  - components/PEAR
+  - components/PEAR/INSTALL
+  - components/PEAR/LICENSE
+  - components/PEAR/OS
+  - components/PEAR/OS/Guess.php
+  - components/PEAR/PEAR
+  - components/PEAR/PEAR.php
+  - components/PEAR/PEAR/Autoloader.php
+  - components/PEAR/PEAR/Builder.php
+  - components/PEAR/PEAR/ChannelFile
+  - components/PEAR/PEAR/ChannelFile.php
+  - >
+    components/PEAR/PEAR/ChannelFile/Parser.php
+  - components/PEAR/PEAR/Command
+  - components/PEAR/PEAR/Command.php
+  - components/PEAR/PEAR/Command/Auth.php
+  - components/PEAR/PEAR/Command/Auth.xml
+  - components/PEAR/PEAR/Command/Build.php
+  - components/PEAR/PEAR/Command/Build.xml
+  - >
+    components/PEAR/PEAR/Command/Channels.php
+  - >
+    components/PEAR/PEAR/Command/Channels.xml
+  - components/PEAR/PEAR/Command/Common.php
+  - components/PEAR/PEAR/Command/Config.php
+  - components/PEAR/PEAR/Command/Config.xml
+  - components/PEAR/PEAR/Command/Install.php
+  - components/PEAR/PEAR/Command/Install.xml
+  - components/PEAR/PEAR/Command/Mirror.php
+  - components/PEAR/PEAR/Command/Mirror.xml
+  - components/PEAR/PEAR/Command/Package.php
+  - components/PEAR/PEAR/Command/Package.xml
+  - components/PEAR/PEAR/Command/Pickle.php
+  - components/PEAR/PEAR/Command/Pickle.xml
+  - >
+    components/PEAR/PEAR/Command/Registry.php
+  - >
+    components/PEAR/PEAR/Command/Registry.xml
+  - components/PEAR/PEAR/Command/Remote.php
+  - components/PEAR/PEAR/Command/Remote.xml
+  - components/PEAR/PEAR/Command/Test.php
+  - components/PEAR/PEAR/Command/Test.xml
+  - components/PEAR/PEAR/Common.php
+  - components/PEAR/PEAR/Config.php
+  - components/PEAR/PEAR/Dependency2.php
+  - components/PEAR/PEAR/DependencyDB.php
+  - components/PEAR/PEAR/Downloader
+  - components/PEAR/PEAR/Downloader.php
+  - >
+    components/PEAR/PEAR/Downloader/Package.php
+  - components/PEAR/PEAR/ErrorStack.php
+  - components/PEAR/PEAR/Exception.php
+  - >
+    components/PEAR/PEAR/FixPHP5PEARWarnings.php
+  - components/PEAR/PEAR/Frontend
+  - components/PEAR/PEAR/Frontend.php
+  - components/PEAR/PEAR/Frontend/CLI.php
+  - components/PEAR/PEAR/Installer
+  - components/PEAR/PEAR/Installer.php
+  - components/PEAR/PEAR/Installer/Role
+  - components/PEAR/PEAR/Installer/Role.php
+  - >
+    components/PEAR/PEAR/Installer/Role/Cfg.php
+  - >
+    components/PEAR/PEAR/Installer/Role/Cfg.xml
+  - >
+    components/PEAR/PEAR/Installer/Role/Common.php
+  - >
+    components/PEAR/PEAR/Installer/Role/Data.php
+  - >
+    components/PEAR/PEAR/Installer/Role/Data.xml
+  - >
+    components/PEAR/PEAR/Installer/Role/Doc.php
+  - >
+    components/PEAR/PEAR/Installer/Role/Doc.xml
+  - >
+    components/PEAR/PEAR/Installer/Role/Ext.php
+  - >
+    components/PEAR/PEAR/Installer/Role/Ext.xml
+  - >
+    components/PEAR/PEAR/Installer/Role/Php.php
+  - >
+    components/PEAR/PEAR/Installer/Role/Php.xml
+  - >
+    components/PEAR/PEAR/Installer/Role/Script.php
+  - >
+    components/PEAR/PEAR/Installer/Role/Script.xml
+  - >
+    components/PEAR/PEAR/Installer/Role/Src.php
+  - >
+    components/PEAR/PEAR/Installer/Role/Src.xml
+  - >
+    components/PEAR/PEAR/Installer/Role/Test.php
+  - >
+    components/PEAR/PEAR/Installer/Role/Test.xml
+  - >
+    components/PEAR/PEAR/Installer/Role/Www.php
+  - >
+    components/PEAR/PEAR/Installer/Role/Www.xml
+  - components/PEAR/PEAR/PackageFile
+  - components/PEAR/PEAR/PackageFile.php
+  - >
+    components/PEAR/PEAR/PackageFile/Generator
+  - >
+    components/PEAR/PEAR/PackageFile/Generator/v1.php
+  - >
+    components/PEAR/PEAR/PackageFile/Generator/v2.php
+  - components/PEAR/PEAR/PackageFile/Parser
+  - >
+    components/PEAR/PEAR/PackageFile/Parser/v1.php
+  - >
+    components/PEAR/PEAR/PackageFile/Parser/v2.php
+  - components/PEAR/PEAR/PackageFile/v1.php
+  - components/PEAR/PEAR/PackageFile/v2
+  - components/PEAR/PEAR/PackageFile/v2.php
+  - >
+    components/PEAR/PEAR/PackageFile/v2/Validator.php
+  - >
+    components/PEAR/PEAR/PackageFile/v2/rw.php
+  - components/PEAR/PEAR/Packager.php
+  - components/PEAR/PEAR/REST
+  - components/PEAR/PEAR/REST.php
+  - components/PEAR/PEAR/REST/10.php
+  - components/PEAR/PEAR/REST/11.php
+  - components/PEAR/PEAR/REST/13.php
+  - components/PEAR/PEAR/Registry.php
+  - components/PEAR/PEAR/RunTest.php
+  - components/PEAR/PEAR/Task
+  - components/PEAR/PEAR/Task/Common.php
+  - >
+    components/PEAR/PEAR/Task/Postinstallscript
+  - >
+    components/PEAR/PEAR/Task/Postinstallscript.php
+  - >
+    components/PEAR/PEAR/Task/Postinstallscript/rw.php
+  - components/PEAR/PEAR/Task/Replace
+  - components/PEAR/PEAR/Task/Replace.php
+  - components/PEAR/PEAR/Task/Replace/rw.php
+  - components/PEAR/PEAR/Task/Unixeol
+  - components/PEAR/PEAR/Task/Unixeol.php
+  - components/PEAR/PEAR/Task/Unixeol/rw.php
+  - components/PEAR/PEAR/Task/Windowseol
+  - components/PEAR/PEAR/Task/Windowseol.php
+  - >
+    components/PEAR/PEAR/Task/Windowseol/rw.php
+  - components/PEAR/PEAR/Validate.php
+  - components/PEAR/PEAR/Validator
+  - components/PEAR/PEAR/Validator/PECL.php
+  - components/PEAR/PEAR/XMLParser.php
+  - components/PEAR/PEAR5.php
+  - components/PEAR/README
+  - components/PEAR/System.php
+  - components/PEAR/package.dtd
+  - components/PEAR/scripts
+  - components/PEAR/scripts/pear.bat
+  - components/PEAR/scripts/pear.sh
+  - components/PEAR/scripts/pearcmd.php
+  - components/PEAR/scripts/peardev.bat
+  - components/PEAR/scripts/peardev.sh
+  - components/PEAR/scripts/pecl.bat
+  - components/PEAR/scripts/pecl.sh
+  - components/PEAR/scripts/peclcmd.php
+  - components/PEAR/template.spec
+  - components/Packages
+  - components/Resources
+  - components/Spyc.php
+  - components/SpycObject.php
+  - components/Tar.php
+  - components/d0.php
+  - components/d0p
+  - components/d0p/data
+  - components/d0p/data.d0d
+  - components/d0p/data/test_dir
+  - components/d0p/data/test_dir/script
+  - components/d0p/meta.d0i
+  - components/d0p/pkg.d0p
+  - components/helper.php
+  - config
+  - config/main.php
+  - controllers
+  - controllers/SiteController.php
+  - data
+  - data/schema.mysql.sql
+  - data/schema.sqlite.sql
+  - data/testdrive.db
+  - extensions
+  - messages
+  - migrations
+  - models
+  - models/LoginForm.php
+  - runtime
+  - runtime/application.log
+  - tests
+  - tests/WebTestCase.php
+  - tests/bootstrap.php
+  - tests/fixtures
+  - tests/functional
+  - tests/functional/SiteTest.php
+  - tests/phpunit.xml
+  - tests/report
+  - tests/unit
+  - views
+  - views/site
+  - views/site/error.php
+  - views/site/index.php
+  - views/site/list.php
+  - views/site/pages
+  - views/site/pages/about.php
+  - views/site/pkg.php
