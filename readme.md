@@ -1,4 +1,4 @@
-# The drag0n Installer: 0.2 ALPHA-PREVIEW
+# The drag0n Installer: 0.3 Deskshell-Alpha
 
 Have you ever had the problem, that you needed to install a package, but you weren't familar wit compiling from source?
 
@@ -22,9 +22,16 @@ drag0n is nearly fully PHP based, packed with additional modules and packages, t
 
 # Installation
 
-Err...easy. Copy drag0n.app into /Applications, or whever you want it. If you want to impersonate my path: `/Applications/drag0n/drag0n.app`
+As I now have 3 submodules, you need to clone with all submodules:
 
-That's it. ^3^
+    git clone --recursive https://github.com/IngwiePhoenix/drag0n.git
+    
+Then just double-click drag0n. But if you are a developer, you may want to re-generate my environment. Do this by cloning straight into /Applications, like:
+
+    $ cd /Applications
+    $ git clone --recursive https://github.com/IngwiePhoenix/drag0n.git
+    
+That way you'll get a path like `/Applications/drag0n/drag0n.app`. That is exactly the way I built my stuff :)
 
 
 # What comes with drag0n?
@@ -35,17 +42,19 @@ With a copy of drag0n, you get:
     - [pthreads](https://github.com/krakjoe/pthreads) 0.45-rc
     - original headers!
 - [Yii](http://yiiframework.com) 1.1.14
-- [Spyc](https://github.com/tekimaki/spyc)
+- [Spyc](https://github.com/tekimaki/spyc) {Submodule}
 - [PHPLinq](http://phplinq.codeplex.com)
 - [GCC](http://hpc.sourceforge.net) 4.9
 	- included libgcc with headers
 - [Make](http://www.gnu.org/software/software.html) 3.82
 - [dylibbundler](http://macdylibbundler.sourceforge.net) 0.4.1
-- [node.js](http://nodejs.org) 0.8.0
-- [appjs](https://github.com/appjs/appjs) 0.20
+- [Deskshell](https://github.com/sihorton/appjs-deskshell) 0.8, customized
 - Precompiled libcurl, libmcrypt, icu, tidy, libpng and GD dynamic libraries
 - [CocoaDialog](https://github.com/mstratman/cocoadialog)
 - [wget](http://www.techtach.org/wget-prebuilt-binary-for-mac-osx-lion) 1.13
+- [phpws](https://github.com/Devristo/phpws) {Submodule}
+- [WebServerPHP](https://code.google.com/p/php-webserver)
+- [WingStyle](https://github.com/IngwiePhoenix/WingStyle) {Submodule}
 
 
 
@@ -149,3 +158,6 @@ Gimme feedback, PR's or whatever you would liek to give me :)
 [@mstratman](https://github.com/mstratman) : CocoaDialog makes it possible to keep my users from staring into a terminal when I perform updates to the behind-the-scenes things. Great work there!
 
 [@bwoebi](https://github.com/bwoebi) : He contributed some patches so far, and is testing drag0n on a MacBook Pro with a Retina display - something I dont have right here :p That way I (or we in that case) can ensure that we'll be retina-ready at some point. :)
+
+[@sihorton](https://github.com/sihorton) : Sihorton started the Deskshell project. It now is the new standart behind drag0n. Expect much more to come.
+In fact, drag0n will end up being the "app-store" for Deskshell apps :)
