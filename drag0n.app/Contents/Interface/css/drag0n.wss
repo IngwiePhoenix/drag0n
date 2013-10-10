@@ -26,22 +26,25 @@
 	->text->align(left)
 ->end?>
 
+<?=WS($row.".entry")
+	->background->rgba(0,0,0, 0.7)
+	->margin(5, 2, 5, 2)
+	->text->align(left)
+->end?>
+
 <?=WS($row.".large")
 	->width("100%")
 	->float(left)
 	->position(relative)
 	->display(block)
+	->color(white)
+	->text->align(center)
 ->end?>
 
 <?=WS($row.".small")
 	->width("70%")
 	->position(relative)
 	->display(block)
-->end?>
-
-<?=WS($row.".large")
-	->color(white)
-	->text->align(center)
 ->end?>
 
 <?=WS($row.".button")
