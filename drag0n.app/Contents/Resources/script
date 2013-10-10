@@ -1,13 +1,28 @@
 #!/usr/bin/php
 <?php
 
+class InfoSwap {
+	public static function toDrag0n() {
+		$ct = dirname(__file__)."/..";
+		rename("$ct/Info.plist","$ct/ChromiumInfo.plist");
+		rename("$ct/drag0nInfo.plist","$ct/Info.plist");
+	}
+	public static function toChromium() {
+		$ct = dirname(__file__)."/..";
+		rename("$ct/Info.plist","$ct/drag0nInfo.plist");
+		rename("$ct/ChromiumInfo.plist","$ct/Info.plist");
+	}
+}
+
 // Hackery: Restart self with the other PHP if the original PHP is lower than 5.5
 list($vMajor, $vMinor, $vRelease) = explode(".",phpversion());
 if($vMinor < 5) {
 	echo "[drag0n] Relaunch into php 5.5.3...\n";
 	$php = escapeshellcmd( realpath(dirname(__FILE__))."/../System/bin/php" );
 	$me = escapeshellarg(__FILE__);
+	InfoSwap::toChromium();
 	system("$php $me");
+	InfoSwap::toDrag0n();
 	exit(0);
 } else {
 	// Set proc-title
@@ -45,8 +60,6 @@ class drag0n {
 				
 		$dir = realpath( dirname($argv[0])."/.." );
 		self::logger("[drag0n/php] Working folder is now: $dir");
-		putenv("NODE_PATH=$dir/System/lib/node");
-		self::logger("[drag0n/php] Adding NODE_PATH: $dir/System/lib/node");
 		
 		// Quickly build a JSON object
 		$desk = json_decode(json_encode(array(

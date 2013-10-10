@@ -9,9 +9,9 @@
 	<key>CFBundleDisplayName</key>
 	<string>drag0n</string>
 	<key>CFBundleExecutable</key>
-	<string>Chromium</string>
+	<string>drag0n</string>
 	<key>CFBundleIconFile</key>
-	<string>app.icns</string>
+	<string>d0.icns</string>
 	<key>CFBundleIdentifier</key>
 	<string>com.drag0n.gui</string>
 	<key>CFBundleInfoDictionaryVersion</key>
@@ -22,8 +22,6 @@
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
 	<string>32.0.1666.0</string>
-	<key>CFBundleSignature</key>
-	<string>Cr24</string>
 	<key>CFBundleVersion</key>
 	<string>1666.0</string>
 	<key>DTSDKBuild</key>
@@ -40,13 +38,17 @@
 	<string>1</string>
 	<key>LSMinimumSystemVersion</key>
 	<string>10.6.0</string>
-	<key>NSPrincipalClass</key>
-	<string>BrowserCrApplication</string>
 	<key>NSSupportsAutomaticGraphicsSwitching</key>
 	<true/>
-	<key>OSAScriptingDefinition</key>
-	<string>scripting.sdef</string>
 	<key>SCMRevision</key>
 	<string>227798</string>
+	<!--
+	<key>LSUIElement</key>
+	<string>1</string>
+	-->
+	<key>NSPrincipalClass</key>
+	<string>NSApplication</string>
+	<key>NSMainNibFile</key>
+	<string>MainMenu</string>
 </dict>
 </plist>

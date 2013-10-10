@@ -133,7 +133,7 @@ class Browser extends Thread {
 		$_ENV = $this->glob['_ENV'];
 		$_SERVER = $this->glob['_SERVER'];
 		$desk = $this->desk;
-		$chrome = realpath(dirname(__file__)."/../../Frameworks/drag0n.app/Contents/MacOS/Chromium");
+		$chrome = realpath(dirname(__file__)."/../../MacOS/Chromium");
 		$args = [
 			($desk->mode=="app"
 				?"--app"

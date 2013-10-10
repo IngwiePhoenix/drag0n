@@ -29,6 +29,7 @@
 <?=WS($row.".entry")
 	->background->rgba(0,0,0, 0.7)
 	->margin(5, 2, 5, 2)
+	->padding(0)
 	->text->align(left)
 ->end?>
 
