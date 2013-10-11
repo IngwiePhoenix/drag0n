@@ -46,7 +46,12 @@ With a copy of drag0n, you get:
 
 - [PHP](http://php.net) 5.5.3
     - [pthreads](https://github.com/krakjoe/pthreads) 0.45-rc
-    - original headers!
+    - gnupg extension
+    - ssh2 extension
+    - curl extension
+    - sockets enabled
+    - pear and phar enabled
+    - original headers
 - [Yii](http://yiiframework.com) 1.1.14
 - [Spyc](https://github.com/tekimaki/spyc) {Submodule}
 - [PHPLinq](http://phplinq.codeplex.com)
@@ -64,6 +69,33 @@ With a copy of drag0n, you get:
 
 
 
+# Key features of drag0n
+- Installs custom packages from different resources.
+- It is modular, so you can make your own wrapper for different repository types (Git, APT, etc) so we do not need just one format but can use existing ones.
+- Usable thru CLI, GUI and URI.
+    - CLI syntax: d0 _action_ _method_ [_arg1_, _arg2_, ...]
+    - URI syntax: d0:action/method?arg1&arg2
+        - Please note. When using the URI, the user will be asked first if the action should be performed or not to prevent evil code.
+    - Actions: install, uninstall, resource, pkg, dev
+    - Install: url [url], id [id appearing in list of available packaes], file [path]
+    - Uninstall: id [id]
+    - resource: add [url or id listed in DIDR], remove [id or name]
+    - pkg [id]
+    - dev: build-env, build-pkg [folder containing package], build-res [output dir (ftp/sftp/file)], [resource info], [folder with d0p files]
+- Purely written in PHP. All and every piece of code is open source.
+- Works out of the box with no own dependencies, since everythign needed is included.
+- Extreme convinience: All resources are listed or can be listed, so long url's can be replaced by short names.
+- Easily readable configuration files (YAML)
+- Included build system to replace the need to lurk them all up - they're all in one place.
+- Very fast and intelligent, can detect already-installed applications and list them in the interface and makes them update-able thru it too.
+- A lot of under-the-hood hackery that can act as a nice code resource for other developers.
+- Can interact with other programs to gain more information about the system and set everything up in a very convinient way.
+- Installs everything into the default locations (such as /usr/local).
+- Offers pre and post scripts for install, update, reinstall and remove to ensure that developers can do everything needed to fine tune a package.
+- Will soon also offer possibility to reboot the os and install things at boot time if needed (will use nvram and launchDaemons).
+
+
+
 ## Wait, what, MULTITHREADING?!
 
 Oh yes, you totally got this right.
@@ -74,13 +106,11 @@ Oh yes, you totally got this right.
 - Worker
 - Stackable
 
-
-
 The first is self-explaining, whilst the second and third are stuck together. A worker is a reusable thread. So what we will be able to do in drag0n is, simultaneous downloads and other things - such as starting another script to fetch updates while we're doing other things...in the short, a lot of things are now possible.
 
 
 
-## But...its PHP - how did it just go...DESKTOP?
+## PHP as a desktop app?
 
 The answer here is appJS - [@milani](https://github.com/milani)'s work.
 
@@ -88,12 +118,24 @@ appJS is a...err... Hm. I would say it's a library. This library allows me to sp
 
 As you can see; I am able to do quite a lot of new things. with PHP. 
 
+__UPDATE__: Now we run on [@sihorton](http://github.com/sihorton)'s [Deskshell](http://github.com/sihorton/appjs-deskshell). It is the evolution of AppJS and defines the new standart in drag0n. I currently had to exclude the shell functionality in the terminal, but it'll return soon :)
 
 
-## There is GCC in there...
+## A build environment within an app?
 
 Yup! Absolutely! If we have a package that comes as source code, or if you are compiling from source, you can just go ahead and use these tools. That said, you do not need to stick to Apple. Ok, we don't have some certain programs, but in the most cases you don't even need them. :)
 
+We will soon include the following set of build tools. Please note, all the current releases are "Debug releases". The offical release will have these stripped, but can be added by just installing a package to do that. Users will be granted the option of downloading a full (Debug+Release) bundle or just a Release bundle. The debug bundle adds additional tools and some re-written components.
+
+Build tools that will be included:
+
+- Ninja
+- Clang
+- GCC
+- G++
+- Make
+
+That basically makes up everything you need for building.
 
 
 ## You use Spyc, why not the actual module?
@@ -106,13 +148,13 @@ But really, having a PHP module like that is very useful, and tutoring too.
 
 
 
-## I know LINQ from c## - but what is it doing here in PHP?
+## I know LINQ from MS' C# - but what is it doing here in PHP?
 
 This confusing piece of software really caught my eye. I am about to be implementing it into the drag0n PHP core to save some `foreach`'es. =)
 
 
 
-## Dylib...bundler?
+## Dylibbundler?
 
 Exactly. Since my PHP is a custom compile, you will most probably have a problem: You don't meet my dependencies. With this utility however I was able to bundle the dylibs into my package - and using the environment variable `DYLD_LIBRARY_PATH`, I can just add a path to the linker to look at and for dynamic libraries. So if your libs dont fit, it'll fall back to mine =)
 
@@ -132,19 +174,8 @@ The `Apple`-class is something I wrote myself, which is especially for making it
 
 # Contributing, Porting, that...
 
-So, you maybe want to have this run on -insert platform here-. To do this, make sure you have a Mac OS environment. Use the php-wrapper script in drag0n.app/Contents/System/bin to run the internal PHP and check for it's config-flags. Example:
+A repository called drag0n-src will be opened up properly soon. It includes the whole lot of dependencies and information to build drag0n. A lot of hand-work will be needed still to get it up and running for your OS. It will compile neatly for MacOS of course, but not for anything else as of now.
 
-```bash
-/Applications/drag0n/drag0n.app/Contents/System/bin/php-wrapper -i
-```
-
-That should do it. 
-
-
-Now, fetch the config-flags and take a note. Next, download pthreads from the link above and place it into the ext/ folder of the PHP source. Then start compiling with the config flags given from the version I delivered.
-
-
-Once done, you have basically what you need to get the base running, since appjs is distributed as a pre-compile. Fetch it there, and start rebuilding my structure with the new versions. I tried to keep my structure very Apple-like, but you can make changes to the structure. PHP files aren't really path-dependent.
 
 
 # HAVE FUN!

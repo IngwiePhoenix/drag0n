@@ -12,18 +12,31 @@ function terminal() {
 				terminal.error("This is not implemented yet!");
 				break;
 			case "php":
-				args.unshift("-r");
-				run("php", args);
+				terminal.error("This is currently not available. Wait for further update.");
+				//args.unshift("-r");
+				//run("php", args);
 				break;
 			case "js":
 				eval(args.join(" "));
 				break;
+			case "?":
+			case "help":
+				terminal.echo("[[;;;status]Usage: php <code>]", "raw");
+				terminal.echo("[[;;;status]Or: js <code>]", "raw");
+				terminal.echo("[[;;;status]Or: shell command]", "raw");
+				terminal.echo("", "raw");
+				terminal.echo("[[;;;status]The drag0n terminal allows you to do some neat stuff as you browse packages.]", "raw");
+				terminal.echo("[[;;;status]You can either execute live PHP or JS code - or even treat this as a real terminal too.]", "raw");
+				terminal.echo("[[;;;status]Note though, that you can not create a login session, since this terminal is a 'dumb' terminal.]", "raw");
+				terminal.echo("[[;;;status]However, you can open man pages or use the d0 build environment without any hassle.]", "raw");
+				break;
 			default:
-				run(type, args);
+				terminal.error("This is currently not available. Wait for further update.");
+				//run(type, args);
 				break;
 		}
     }, {
-        greetings: "drag0n console. Use 'd0' to access drag0n functions, 'php' to run PHP code, 'js' to run javascript code.",
+        greetings: "drag0n console. Type help or ? for more info.",
         name: 'd0',
         prompt: 'drag0n> '
     });
