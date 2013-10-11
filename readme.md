@@ -19,6 +19,12 @@ Oh yeah, I know how you feel. Especially when you then try to install package ma
 drag0n is nearly fully PHP based, packed with additional modules and packages, to make the best out of this powerful scripting language. Basically, I dont like to remember it as a "pre hypertext processor". That is not what it is. It's a real scripting language with some things that make it look more like a real programm - especialyl when you add extensions like I did to enable _multithreading_. This is so different from what you think, is it? PHP, a multithreading scripting language. And if i could have gotten `bcompiler` to work, i even would have some binaries made out of PHP completely.
 
 
+## Hackery with OS X
+
+To make Mac OS treat one bundle as two individual apps, we have to swap Info.plist files. It is quite funny that it 1) works and 2) is so dirty but works. But really, I just had no other oslution than to implement InfoSwap, a little class with just two stati methods: *toDrag0n* and *toChromium*. These methods swap the Info.plist file to either the one of drag0n or chromium. Sounds easy, is tricky. Consider what happens if our parent process gets terminated somehow? I am building a stack of three processes right here; php 5.3.3 (OS X default) -> php 5.5.3 (drag0n-php) -> Chromium 32. The first and second process will be ran in the background - whilst the first swaps the Info.plist files, so that Chromium launches correctly. drag0n uses LSUIElement=1, and Chromium -=0. As you realize, it is really a lot of hackery.
+
+Drag0n is a big pile of hackery, toat put together, results into a very nice app. If you are searching for some, lurk thru drag0n. ;)
+
 
 # Installation
 
