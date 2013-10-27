@@ -1,5 +1,5 @@
 <?php function SpycObject($input, $convert = false, $action = "Load") {
-	include_once "Spyc/Spyc.php";
+	include_once dirname(__FILE__)."/Spyc/Spyc.php";
 	if($convert == false) {
 		return SpycObject(call_user_func(array("Spyc","YAML".$action), $input), true);
 	} else {

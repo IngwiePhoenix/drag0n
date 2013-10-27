@@ -19,17 +19,16 @@
 	const T_RES=0xa2;
 	
 	// Constructor.
+	// Set up destination and information paths.
+	// Note, this is optimal. It's only here as this file is the base for anything else.
 	#public function __construct($installPath="/", $infoPath);
-	
-	// Do the actual copying process.
-	// Should return self::F_ORIG or self::F_BACKUP
-	public function icp($in, $out);
-	
+		
 	// Download given URL content and return an array of [content=>str, http_code=>int]
 	public function download($url);
 	
 	// Downloads multiple things at once - numeric array. Requires pthreads to be installed.
-	public function th_download(array $urls);
+	// $paralell defines how many downloads we may do at once
+	public function th_download(array $urls, $paralell=1);
 	
 	// Install-phase. Use given file and work it out
 	// Returns either true or false
@@ -49,29 +48,39 @@
 	public function script($scriptFile);
 	
 	/* Get the whole information of a package, by it's ID.
-	   This should consist of an array like so:
+	   This COULD consist of an array like so:
 	   [
-	   		"pkg"=>id, name, etc
-	   		"backups"=>name of backupped files
-	   		"files"=>files that are installed
+	   		"pkg"=>[ id, name, etc ]
+	   		"backups"=>[ name of backupped files ]
+	   		"files"=>[ files that are installed ]
 	   		"scripts"=>[ "preinstall"=>..., "postinstall".... ]
 	   ]
+	   Script files may be delivered as clear-text, will be written to disk and executed that way.
+	   Please note, if you're implementing this interface, you may structure your array as you wish. This is the d0 example.
 	*/
 	public function getInfo($id);
 	
+	// Get all packages installed, should be read off info file
+	public function getInstalled();
+	
+	// a function like is_null - check if a package is installed. Should be used for dependendency tracking
+	public function isInstalled($id);
+	
 	// validate a resource.
-	// $in can be a url OR an idendifier from the D0-DB.
+	// $in can be a url OR an idendifier from the DIDR resource database.
 	public function validateResource($in);
 	
 	// Validate package. If you have hashes, you are ADVISED to use this.
-	public function validateFile($file);
+	public function validateFile($file, $hash);
 	
-	// Get information from a remote DB. By default, this is the D0-DB. Other classes implementing that, may change this...just maybe.
-	// The D0-DB responds to an ID=Type pair.
+	// Get information from a remote DB. By default, this is the DIDR database. Other classes implementing that, may change this...just maybe.
+	// The DIDR database responds to an ID=Type pair.
 	// Type can be one of the T_ constants.
 	public function retrieve($id,$type);
 	
-	// Return a version string
+	// return some information, like the version and such.
+	// Use __invoke to return Version.
 	public static function version();
+	public function __invoke();
 	
 } ?>

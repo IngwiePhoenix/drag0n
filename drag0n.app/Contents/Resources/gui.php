@@ -12,10 +12,6 @@
 	$yii=$dir.'/Frameworks/yii.framework/Resources/yii.php';
 	$config=$dir.'/Resources/config/main.php';
 
-	// AppJS paths
-	defined("APPJS_ROOT") 		or define("APPJS_ROOT",$dir);
-	defined("APPJS_BASEDIR") 	or define("APPJS_BASEDIR","http://localhost/");
-
 	// We NEED Yii.
 	require_once($yii);
 

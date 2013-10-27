@@ -1,31 +1,42 @@
 <?php 
 $_vYii = Yii::getVersion();
 $me = dirname(__FILE__)."/../..";
-include_once dirname(__FILE__).DIRECTORY_SEPARATOR.'../components/d0.php';
+
+// defines
+define('D0_ROOT',$me);
 
 // Aliases
-Yii::setPathOfAlias("Library",APPJS_ROOT."/Library");
+Yii::setPathOfAlias("Library",D0_ROOT."/Library");
+Yii::setPathOfAlias("Core",D0_ROOT."/Core");
+
+// includes
+include_once Yii::getPathOfAlias('Core').'/d0.php';
 
 return array(
 	'basePath'=>dirname(__FILE__).DIRECTORY_SEPARATOR.'..',
 	'name'=>'drag0n Installer',
-	'theme'=>'Interface',
 
 	// preloading 'log' component
-	'preload'=>array('log','Apple'),
+	'preload'=>array('log', 'd0'),
 
 	// autoloading model and component classes
 	'import'=>array(
 		'application.models.*',
 		'application.components.*',
-		'Library.macos.Apple',
+		'application.components.Spyc.*',
+		'Core.d0',
+		'Core.Interfaces.*',
+		'Core.OS.*',
+		'Core.Package.*',
+		'Core.Installer.*',
+		'Core.Platform.*'
 	),
 
 	'modules'=>array(),
 
 	// application components
 	'components'=>array(
-		'errorHandler'=>array( 'errorAction'=>'site/error', ),
+		'errorHandler'=>array( 'errorAction'=>'site/error' ),
 		'log'=>array(
 			'class'=>'CLogRouter',
 			'routes'=>array(
@@ -57,6 +68,5 @@ return array(
 		#		  .'Mod: appJS/'.$_ENV['AJS_VERSION'].', Yii/'.$_vYii."<br/>"
 		#		  ."Ext: pthreads/".(new ReflectionExtension("pthreads"))->getVersion(),
 		'version'=>'Needs fixing',
-		'basePath'=>APPJS_BASEDIR,
 	),
 );

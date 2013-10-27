@@ -5,7 +5,8 @@
 	
 	public function init() {
 		parent::init();
-		#Yii::app()->getRequest()->setScriptUrl($_ENV['SCRIPT_NAME']);
+		
+		Yii::app()->theme='Interface';
 		
 		$dir = scandir(APPJS_ROOT."/System/tmp");
 		foreach($dir as $k=>$file) {
