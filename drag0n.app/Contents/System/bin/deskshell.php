@@ -137,6 +137,8 @@ class Browser extends Thread {
 		$_SERVER = $this->glob['_SERVER'];
 		$desk = $this->desk;
 		$chrome = realpath(dirname(__file__)."/../../MacOS/Chromium");
+		$tmpdir = sys_get_temp_dir()."/".uniqid();
+		@mkdir($tmpdir);
 		$args = [
 			($desk->mode=="app"
 				?"--app"
@@ -144,7 +146,7 @@ class Browser extends Thread {
 			)."=http://localhost:".$this->htport."/",
 			"--remote-debugging-port=".$this->crport,
 			#"--user-data-dir=".dirname(__file__)."/../chrome_profile",
-			"--user-data-dir=".sys_get_temp_dir(),
+			"--user-data-dir=".$tmpdir,
 			"--disable-translate",
 			"--app-window-size=1024,800"
 		]; 
