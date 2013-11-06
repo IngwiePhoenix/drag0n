@@ -24,7 +24,7 @@ return array(
 		'application.models.*',
 		'application.components.*',
 		'application.components.Spyc.*',
-		'Core.d0',
+		'Core.*',
 		'Core.Interfaces.*',
 		'Core.OS.*',
 		'Core.Package.*',

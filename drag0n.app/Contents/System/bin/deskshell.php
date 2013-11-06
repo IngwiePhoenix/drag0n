@@ -76,6 +76,7 @@ class Server extends Thread {
 		// Set up request handler
 		$server->handleRequests("Request", "send");
 	}
+	public function off() { exit(0); }
 }
 class Request {
 	public function send($WebServer) {
@@ -121,11 +122,13 @@ class Browser extends Thread {
 	public $htport;
 	public $message;
 	public $desk;
+	public $server; #ref
 	private $glob=array();
 	
-	public function __construct($crport, $htport, $desk, array $glob) {
+	public function __construct($crport, $htport, $server, $desk, array $glob) {
 		$this->htport = $htport;
 		$this->crport = $crport;
+		$this->server = $server;
 		$this->desk = $desk;
 		$this->glob=$glob;
 	}
@@ -140,7 +143,8 @@ class Browser extends Thread {
 				:"--".$desk->mode
 			)."=http://localhost:".$this->htport."/",
 			"--remote-debugging-port=".$this->crport,
-			"--user-data-dir=".dirname(__file__)."/../chrome_profile",
+			#"--user-data-dir=".dirname(__file__)."/../chrome_profile",
+			"--user-data-dir=".sys_get_temp_dir(),
 			"--disable-translate",
 			"--app-window-size=1024,800"
 		]; 
@@ -199,8 +203,9 @@ class Browser extends Thread {
 					&& $o->params->reason=="target_closed"
 				) { 
 					echo "[WebSocket Client] Browser/WebSocket was closed.\n";
-					$this->server->pop(); # Tell the server to shut down. To do this...we cause a SegFault. Looking for better solution.
-					exit(0); 
+					# Commit suicide :p
+					posix_kill(getmypid(), 9); #Dead.
+					exit(0);
 					break;
 				}
 				
@@ -256,9 +261,10 @@ class Deskshell {
 			"stdout"=>fopen('php://stdout', 'w')
 		]);
 		$server->start();
+		$server_ref = &$server;
 
 		echo "[Deskshell PHP] Starting Browser...\n";
-		$browser = new Browser($crport, $htport, $desk, $GLOBALS);
+		$browser = new Browser($crport, $htport, $server_ref, $desk, $GLOBALS);
 		$browser->start();
 		
 		// Crossing the threads

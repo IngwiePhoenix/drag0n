@@ -1,0 +1,48 @@
+#!/bin/bash
+# d0.build -- fire off a build environment.
+
+# Tell the upcoming shell that we're here.
+export drag0n=true
+
+# Vars
+ME=$(dirname "$0")
+GREEN=$(tput setaf 2)
+RESET=$(tput sgr0)
+PREPEND_BIN=true
+PREPEND_LIB=true
+PREPEND_INC=true
+LIBRARY_PATH=/usr/lib:/usr/local/lib
+INCLUDE_PATH=/usr/include:/usr/local/include
+for i; do
+	case "$i" in
+		--append-bin|-ab) PREPEND_BIN=false; shift;;
+		--append-lib|-al) PREPEND_LIB=false; shift;;
+		--append-inc|-ai) PREPEND_INC=false; shift;;
+	esac;
+done
+
+# Export the vars
+if [ $PREPEND_BIN == true ]; then
+	export PATH=$($ME/d0-config --bin-path):$PATH
+else
+	export PATH=$PATH:$($ME/d0-config --bin-path)
+fi
+if [ $PREPEND_LIB == true ]; then
+	export LIBRARY_PATH=$($ME/d0-config --lib-path):$LIBRARY_PATH
+else
+	export LIBRARY_PATH=$LIBRARY_PATH:$($ME/d0-config --lib-path)
+fi
+if [ $PREPEND_INC == true ]; then
+	export INCLUDE_PATH=$($ME/d0-config --inc-path):$INCLUDE_PATH
+else
+	export INCLUDE_PATH=$INCLUDE_PATH:$($ME/d0-config --inc-path)
+fi
+
+# Create new PS1 and prefixing it with drag0n
+#SHELLOPTS=$(bash -lc 'echo $SHELLOPTS')
+export SHELLOPTS
+oPS1=$(bash -lc 'echo $PS1')
+export PS1="${GREEN}drag0n${RESET}|$oPS1"
+
+echo -e "${GREEN}--> Launching <${SHELL}> with changed environment. Please note, your .profile/.bashrc is not loaded, to avoid conflicts.${RESET}"
+$SHELL --noprofile --norc -l

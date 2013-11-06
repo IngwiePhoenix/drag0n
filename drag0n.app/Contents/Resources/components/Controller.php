@@ -8,13 +8,11 @@
 		
 		Yii::app()->theme='Interface';
 		
-		$dir = scandir(APPJS_ROOT."/System/tmp");
+		$dir = glob(D0_ROOT."/System/tmp/*");
 		foreach($dir as $k=>$file) {
-			if($file != "." && $file != "..") unlink(APPJS_ROOT."/System/tmp/".$file);
+			if($file != "." && $file != "..") unlink($file);
 		}
-		
-		// Init the d0 singleton correctly:
 		include_once "d0.php";
-		d0(Yii::app()->Apple->workDir);
+		d0(d0::QUIET);
 	}
 } ?>

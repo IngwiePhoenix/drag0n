@@ -12,7 +12,19 @@ class InfoSwap {
 		rename("$ct/Info.plist","$ct/drag0nInfo.plist");
 		rename("$ct/ChromiumInfo.plist","$ct/Info.plist");
 	}
+	
+	public static function restore() {
+		$pls = dirname(__file__)."/../System/var/d0";
+		$root = dirname(__file__)."/..";
+		copy("$pls/ChromiumInfo.plist","$root/ChromiumInfo.plist");
+		copy("$pls/drag0nInfo.plist","$root/drag0nInfo.plist");
+		chmod("$pls/drag0nInfo.plist",0777);
+		chmod("$pls/ChromiumInfo.plist",0777);
+	}
 }
+
+// Prepair
+InfoSwap::restore();
 
 // Hackery: Restart self with the other PHP if the original PHP is lower than 5.5
 list($vMajor, $vMinor, $vRelease) = explode(".",phpversion());
@@ -20,9 +32,11 @@ if($vMinor < 5) {
 	echo "[drag0n] Relaunch into php 5.5.3...\n";
 	$php = escapeshellcmd( realpath(dirname(__FILE__))."/../System/bin/php" );
 	$me = escapeshellarg(__FILE__);
+	InfoSwap::restore();
 	InfoSwap::toChromium();
-	system("$php $me");
+	system("$php $me 2>&1");
 	InfoSwap::toDrag0n();
+	InfoSwap::restore();
 	exit(0);
 } else {
 	// Set proc-title
@@ -39,7 +53,7 @@ class drag0n {
 	public static function logger($msg) {
 		static $stderr;
 		if (!is_resource($stderr))
-			$stderr = fopen("php://stderr", "w");
+			$stderr = fopen("php://fd/1", "w");
 		fwrite($stderr, $msg."\n");
 	}
 

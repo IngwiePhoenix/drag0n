@@ -19,11 +19,13 @@
 	public $operatingsystem;
 	public $return; # Covers the configuration's result.
 	public $quiet=false;  # Shuts up the output. Used in d0()->log
+	public $configuration=array();
 		
 	// The hidden class instances
 	private $c_installer;
 	private $c_platform;
 	private $c_operatingsystem;
+	private $c_package;
 	
 	// Singleton syntax
 	private static $instance=null;
@@ -46,6 +48,10 @@
 		// Configure our usual platform first.
 		$this->setOS(php_uname('s'));
 		$this->setPlatform(php_uname('s'));
+		$this->setPackage($this->package);
+		
+		$this->log('Loading configuration');
+		$this->config();
 	}
 	
 	// magic methods
@@ -71,8 +77,10 @@
 		if(method_exists($this->c_installer, $func)) return call_user_func_array([$this->c_installer, $func], $args);
 		if(method_exists($this->c_platform, $func)) return call_user_func_array([$this->c_platform, $func], $args);
 		if(method_exists($this->c_operatingsystem, $func)) return call_user_func_array([$this->c_operatingsystem, $func], $args);
+		if(method_exists($this->c_package, $func)) return call_user_func_array([$this->c_package, $func], $args);
 		trigger_error("Fatal error: Trying to call undefined method $func in the drag0nCore scope", E_USER_ERROR);
 	}
+	public function __clone() { die("You can not clone this!\n"); }
 	
 	// Ultra-magic method
 	public function init(/*mixed..like really mixed.*/) {
@@ -86,11 +94,23 @@
 			if(isset($conf['with'])) {
 				// Change platform. (with: minecraft)
 				$this->platform = $conf;
-			}
-			if(isset($conf['use'])) {
-				// Change platform (use: APT)
+			} elseif(isset($conf['use'])) {
+				// Change Installer (use: APT)
 				$this->installer = $conf;
-			}
+			} elseif(isset($conf['target'])) {
+				// Change Installer (use: APT)
+				$this->package = $conf;
+			} else {
+				// Configure other things
+				foreach($conf as $name=>$val) {
+					// If the value is an array, we're configuring stuff in the existing configuration.
+					if(is_array($cv)) {
+						foreach($cv as $ckey => $cval) {
+							$this->config($ckey, $cval, $name);
+						}
+					} else $this->$name=$val;
+				}
+			}			
 		}
 		
 		// Case 2: The user supplied a key and value
@@ -154,6 +174,7 @@
 	}
 	private function setInstaller($conf) { $this->setup('use', 'Installer', $conf); }
 	private function setPlatform($conf) { $this->setup('with', 'Platform', $conf); }
+	private function setPackage($conf) { $this->setup('target', 'Package', $conf); }
 	private function setOS($conf) { $this->setup('on', 'OperatingSystem', $conf); }
 	private function getConfigFile() {
 		$home = $_ENV['HOME'];
@@ -168,15 +189,13 @@
 	
 	public function log($message) {
 		if($this->quiet == false) {
-			$stdout = fopen('php://stdout','w');
-			fwrite(
-				$stdout, 
-				"[drag0n/core] $message\n"
-			);
+			$str='[drag0n/core] '.$message;
+			if(isset($_ENV['TERM']) && $_ENV['TERM']!='dumb') Terminal::log($str);
+			else Terminal::stdout($str."\n");
 		}
 	}
 	
-	private function config($key=null, $value=null) {
+	private function config($key=null, $value=null, $category='Generall') {
 		$os = $this->operatingsystem;
 		$cfp = $os::configurationFilePath();
 		$home = $_ENV['HOME'];
@@ -196,13 +215,17 @@
 		// merge
 		$conf = array_merge($global, $conf);
 		
+		if(!is_null($category)) $conf2 &= $conf[$category];
+		
 		if($key==null && $value==null) {
-			$this->return = $conf;
+			$this->return = $conf2;
 		} elseif($key != null && $value==null) {
-			$this->return = $conf[$key];
+			$this->return = $conf2[$key];
 		} elseif($key != null && $value != null) {
-			$conf[$key]=$value;
+			$conf2[$key]=$value;
 		}
+		
+		$this->configuration=$conf;
 		
 		// Write
 		$this->log("Saving configuration to: $home/.d0rc");
@@ -218,3 +241,22 @@
 	public function version() { echo "drag0n PHP-API 0.1\n"; }
 
 } function d0(/* mixed $everything */) { return call_user_func_array(['d0','instance'], func_get_args()); }
+
+# This is a musthave if we aren't running off Yii, but the sore core.
+spl_autoload_register(function($class){
+	$me=dirname(__file__);
+	$file="$class.php";
+	$dirs=[
+		'Platform',
+		'Installer',
+		'OS',
+		'Package',
+		'Interfaces',
+		'.',
+		'Utils/Spyc'
+	];
+	foreach($dirs as $f) {
+		$cf="$me/$f/$file";
+		if(file_exists($cf)) include_once $cf;
+	}
+});

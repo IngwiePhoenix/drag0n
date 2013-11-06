@@ -2,7 +2,7 @@
 
 	// Of course, we need to generate an object:
 	// $output may be null, if we just want to list contents, get meta, or alike.
-	public function __construct($archiveName, $output=null);
+	public function init($archiveName, $output=null);
 	
 	// List the contents
 	/* array(
@@ -10,7 +10,7 @@
 		"relative/path"=>array(type, size, ...)
 	) */
 	// Note, d0p files will extract relative to the CWD, even if you supplied an apsolute path!
-	public function list();
+	public function listFiles();
 	
 	// Extract single file
 	// $innerFile == path inside archive

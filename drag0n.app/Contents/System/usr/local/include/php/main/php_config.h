@@ -143,7 +143,7 @@
 /* #undef COMPILE_DL_ODBC */
 
 /* Whether to build opcache as dynamic module */
-#define COMPILE_DL_OPCACHE 1
+/* #undef COMPILE_DL_OPCACHE */
 
 /* Whether to build openssl as dynamic module */
 /* #undef COMPILE_DL_OPENSSL */
@@ -471,7 +471,7 @@
 /* #undef HAVE_BCMATH */
 
 /* */
-#define HAVE_BCOMPILER 1
+/* #undef HAVE_BCOMPILER */
 
 /* */
 /* #undef HAVE_BIND_TEXTDOMAIN_CODESET */
@@ -1164,7 +1164,7 @@
 #define HAVE_MONETARY_H 1
 
 /* Define if you have mprotect() function */
-#define HAVE_MPROTECT 1
+/* #undef HAVE_MPROTECT */
 
 /* Define to 1 if you have the `mremap' function. */
 /* #undef HAVE_MREMAP */
@@ -1485,7 +1485,7 @@
 #define HAVE_RL_COMPLETION_MATCHES 1
 
 /* */
-/* #undef HAVE_RL_ON_NEW_LINE */
+#define HAVE_RL_ON_NEW_LINE 1
 
 /* Whether you use Roxen */
 /* #undef HAVE_ROXEN */
@@ -1542,16 +1542,16 @@
 /* #undef HAVE_SHMOP */
 
 /* Define if you have SysV IPC SHM support */
-#define HAVE_SHM_IPC 1
+/* #undef HAVE_SHM_IPC */
 
 /* Define if you have mmap(MAP_ANON) SHM support */
-#define HAVE_SHM_MMAP_ANON 1
+/* #undef HAVE_SHM_MMAP_ANON */
 
 /* Define if you have mmap() SHM support */
-#define HAVE_SHM_MMAP_FILE 1
+/* #undef HAVE_SHM_MMAP_FILE */
 
 /* Define if you have POSIX mmap() SHM support */
-#define HAVE_SHM_MMAP_POSIX 1
+/* #undef HAVE_SHM_MMAP_POSIX */
 
 /* Define if you have mmap("/dev/zero") SHM support */
 /* #undef HAVE_SHM_MMAP_ZERO */
@@ -2053,7 +2053,7 @@
 #define HAVE_ZIP 1
 
 /* */
-/* #undef HAVE_ZLIB */
+#define HAVE_ZLIB 1
 
 /* whether _controlfp is present usable */
 /* #undef HAVE__CONTROLFP */
@@ -2164,7 +2164,7 @@
 #define PHP_BLOWFISH_CRYPT 1
 
 /* PHP build date */
-#define PHP_BUILD_DATE "2013-09-13"
+#define PHP_BUILD_DATE "2013-11-05"
 
 /* Define if your system has fork/vfork/CreateProcess */
 #define PHP_CAN_SUPPORT_PROC_OPEN 1
@@ -2245,7 +2245,7 @@
 #define PHP_STD_DES_CRYPT 1
 
 /* uname -a output */
-#define PHP_UNAME "Darwin Kevins-MacBook-Air.local 12.4.0 Darwin Kernel Version 12.4.0: Wed May 1 17:57:12 PDT 2013; root:xnu-2050.24.15~1/RELEASE_X86_64 x86_64"
+#define PHP_UNAME "Darwin Kevins-MacBook-Air.local 13.0.0 Darwin Kernel Version 13.0.0: Thu Sep 19 22:22:27 PDT 2013; root:xnu-2422.1.72~6/RELEASE_X86_64 x86_64"
 
 /* Whether PHP has to use its own crypt_r for blowfish, des and ext des */
 #define PHP_USE_PHP_CRYPT_R 1

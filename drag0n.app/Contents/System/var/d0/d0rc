@@ -1,4 +1,70 @@
 # drag0n default configuration
+# Big subject to be chaned. But its used by the GUI, CLI, and URI - as well as the .build and .dev tools.
 ---
-developer: yes
-use fullscreen: yes
+
+# All parts of d0 use these settings.
+Generall:
+    # If you are a developer, set this to true.
+    developer: yes
+    # Disable or enable debugging
+    debug: yes
+    # Allow only root to use drag0n from the command line
+    root only: no
+    # Use sudo instead of the root user for root operations
+    use sudo: no
+    # Display developer tools (libraries, headers, etc...) in the search
+    display developer tools: yes
+   
+# The Deskshell based interface uses this 
+GUI:
+    # Use fullscreen upon launch (not implemented yet)
+    use fullscreen: yes
+    # Update resources upon launch
+    instant update: yes
+    # Only start searching when hitting return while in the search field. By default, it will search after each keypress.
+    instant search: yes
+    
+# Only the command line uses these
+CLI:
+    # Enable the ncurses-based interface. (Not implemented, will be only experimental)
+    ncurses: false
+    # Display executed commands
+    show cmd: true
+    # Display output of commands (such as configure).
+    # Developers can override this setting, if they need to display information in the terminal.
+    show stdout: true
+    # Hide everything that'd come thru STDERR.
+    show stderr: true
+
+# The build helper uses this
+.build:
+    # Force make, even if we could use ninja
+    force make: false
+    # Use cmake (currently not included)
+    use cmake: false
+    # Prefer pre-installed tools over bundled tools
+    use pre-installed: false
+    # Modify LIBRARY_PATH, with drag0n's libdirs before or after the defaults
+    d0 libdir at: front # Alternative is: back
+    # Same as above, just with INCLUDE_PATH
+    d0 incdir at: front
+    # Expose clang if it's inside the bundle
+    clang: true
+    # Set PREFIX to drag0n.app/Contents/System/usr/local instead? Useful if you're rebuilding some developer tools - they are stored in usr/local.
+    add prefix: false
+    # ID of the build tools
+    build toolkit id: d0.dev.buildtools
+
+# The developer toolkit uses this
+.dev:
+    # Use one folder for all resources. If false, --outdir must be specified, and if even that isn't given, we use the current folder.
+    default folder: false # Type a folder in here to use it. Make sure it's writable by the current user.
+    # Warn if d0i/d0r files are missing information
+    show errors: true
+    # id of the build tool package
+    build tools id: d0.dev.devtools
+
+# The URI scheme uses this
+URI:
+    # Allow the URI scheme
+    use: true
