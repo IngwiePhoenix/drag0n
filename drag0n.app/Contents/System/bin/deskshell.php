@@ -16,11 +16,13 @@ class Process extends Thread {
 	public $programm;
 	public $args;
 	private $env;
+	public $redirect;
 	
-	public function __construct($programm, array $args, array $env) { 
+	public function __construct($programm, array $args, array $env, $redirect="") { 
 		$this->programm = $programm;
 		$this->args = $args;
 		$this->env=$env;
+		$this->redirect=$redirect;
 	}
 	public function run() {
 		$this->spec = array(
@@ -31,7 +33,7 @@ class Process extends Thread {
 
 		$argStr = array(escapeshellcmd($this->programm));
 		foreach($this->args as $arg) $argStr[] .= escapeshellarg($arg);
-		$argStr = implode(" ", $argStr);
+		$argStr = implode(" ", $argStr)." ".$this->redirect;
 
 		$this->proc = proc_open(
 			$argStr, 
@@ -152,7 +154,7 @@ class Browser extends Thread {
 		]; 
 		
 		// Fire off the process
-		$chr = new Process($chrome, $args, $_ENV);
+		$chr = new Process($chrome, $args, $_ENV, "2>&1");
 		if(!$chr->start()) die("Can not start chromium!\n");
 
 		// We need a web-socket. So we gonna see if we can have one
