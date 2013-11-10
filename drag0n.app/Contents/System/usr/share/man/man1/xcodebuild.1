@@ -1,0 +1,494 @@
+.\" man page for xcodebuild
+.\" Copyright (c) 2010-2013 Apple Inc.  All rights reserved.
+.\"
+.\" IMPORTANT: Copies of this man page are included in the Xcode project and the OSXComponents project. Updates should be made to both.
+.\"
+.\" to preview: /usr/bin/nroff -msafer -mandoc xcodebuild.1 | less
+.\"         or: /usr/bin/groff -Tps -msafer -mandoc -c xcodebuild.1 | pstopdf -i -o /tmp/xcodebuild-new.1.pdf ; open -a Preview /tmp/xcodebuild-new.1.pdf
+.\"
+.Dd January 22, 2013     \" DATE
+.Dt XCODEBUILD 1         \" Program name and manual section number 
+.Os "Mac OS X"
+..\"
+.\"
+.Sh NAME                 \" Section Header - required - don't modify 
+.Nm xcodebuild
+.Nd build Xcode projects and workspaces
+.\"
+.Sh SYNOPSIS             \" Section Header - required - don't modify
+.Nm
+.Op Fl project Ar projectname 
+.Op Fl target Ar targetname No ...
+.Op Fl configuration Ar configurationname
+.Op Fl sdk [ Ar sdkfullpath | Ar sdkname ]
+.Op Ar buildaction No ...
+.Op Ar setting Ns = Ns Ar value No ...
+.Op Ns - Ns Ar userdefault Ns = Ns Ar value No ...
+.\"
+.Nm
+.Op Fl project Ar projectname 
+.Fl scheme Ar schemename
+.Op Fl destination Ar destinationspecifier
+.Op Fl destination-timeout Ar value
+.Op Fl configuration Ar configurationname
+.Op Fl sdk [ Ar sdkfullpath | Ar sdkname ]
+.Op Ar buildaction No ...
+.Op Ar setting Ns = Ns Ar value No ...
+.Op Ns - Ns Ar userdefault Ns = Ns Ar value No ...
+.\"
+.Nm
+.Fl workspace Ar workspacename
+.Fl scheme Ar schemename
+.Op Fl destination Ar destinationspecifier
+.Op Fl destination-timeout Ar value
+.Op Fl configuration Ar configurationname
+.Op Fl sdk [ Ar sdkfullpath | Ar sdkname ]
+.Op Ar buildaction No ...
+.Op Ar setting Ns = Ns Ar value No ...
+.Op Ns - Ns Ar userdefault Ns = Ns Ar value No ...
+.\"
+.Nm
+.Fl version
+.Op Fl sdk [ Ar sdkfullpath | Ar sdkname ]
+.Op Ar infoitem
+.\"
+.Nm
+.Fl showsdks
+.\"
+.Nm
+.Fl list
+.Op Fl project Ar projectname | Fl workspace Ar workspacename
+.\"
+.Nm
+.Fl exportArchive
+.Fl exportFormat Ar format
+.Fl archivePath Ar xcarchivepath
+.Fl exportPath Ar destinationpath
+.Op Fl exportProvisioningProfile Ar profilename
+.Op Fl exportSigningIdentity Ar identityname
+.Op Fl exportInstallerIdentity Ar identityname
+.\"
+.Sh DESCRIPTION          \" Section Header - required - don't modify
+.Nm
+builds one or more targets contained in an Xcode project, or builds a scheme contained in an Xcode workspace or Xcode project.
+.\"
+.Ss Usage
+To build an Xcode project, run 
+.Nm
+from the directory containing your project
+.Po i.e. the directory containing the
+.Ar projectname . Ns No xcodeproj
+package
+.Pc . If you have multiple projects in the this directory you will 
+need to use
+.Fl project
+to indicate which project should be built.  By default, 
+.Nm
+builds the first target listed in the project, with the default build configuration. The order of the targets is a property of the project and is the same for all users of the project.
+.Pp
+To build an Xcode workspace, you must pass both the 
+.Fl workspace
+and
+.Fl scheme
+options to define the build.  The parameters of the scheme will control which targets are built and how they are built, although you may pass other options to
+.Nm
+to override some parameters of the scheme.
+.Pp
+There are also several parameters to display info about the installed version of Xcode or about projects or workspaces in the local directory, but which do not initiate a build.  These include
+.Fl version ,
+.Fl showsdks ,
+and
+.Fl usage .
+.\"
+.\"
+.Ss Options
+.Bl -tag -width 4n
+.\"
+.It Fl project Ar projectname
+Build the project specified by 
+.Ar projectname .
+Required if there are multiple project files in the same directory.
+.\"
+.It Fl target Ar targetname
+Build the target specified by 
+.Ar targetname .
+.\"
+.It Fl alltargets
+Build all the targets in the specified project.
+.\"
+.It Fl workspace Ar workspacename
+Build the workspace specified by
+.Ar workspacename .
+.\"
+.It Fl scheme Ar schemename
+Build the scheme specified by
+.Ar schemename .
+Required if building a workspace.
+.\"
+.It Fl destination Ar destinationspecifier
+Use the destination device described by
+.Ar destinationspecifier .
+Defaults to a destination that is compatible with the selected scheme.  See the section on destinations for more details.
+.\"
+.It Fl destination-timeout Ar timeout
+Use the specified
+.Ar timeout
+when searching for a destination device. The default is 30 seconds.
+.\"
+.It Fl configuration Ar configurationname
+Use the build configuration specified by 
+.Ar configurationname
+when building each target.
+.\"
+.It Fl arch Ar architecture
+Use the architecture specified by 
+.Ar architecture
+when building each target.
+.\"
+.It Fl sdk [ Ar <sdkfullpath> | Ar <sdkname> ]
+Build an Xcode project or workspace against the specified SDK, using build tools appropriate for that SDK. The argument may be an absolute path to an SDK, or the canonical name of an SDK.
+.\"
+.It Fl showsdks
+Lists all available SDKs that Xcode knows about, including their canonical names suitable for use with
+.Fl sdk .
+Does not initiate a build.
+.\"
+.It Fl list
+Lists the targets and configurations in a project, or the schemes in a workspace. Does not initiate a build.
+.\"
+.It Fl derivedDataPath Ar path
+Overrides the folder that should be used for derived data when performing a build action on a scheme in a workspace.
+.\"
+.It Fl resultBundlePath Ar path
+Writes a bundle to the specified
+.Ar path
+with results from performing a build action on a scheme in a workspace.
+.\"
+.It Fl exportArchive
+Specifies that an archive should be exported. Requires
+.Fl exportFormat ,
+.Fl archivePath ,
+and
+.Fl exportPath .
+Cannot be passed along with a build action.
+.\"
+.It Fl exportFormat Ar format
+Specifies the format to which the archive should be exported. Valid formats are
+.Li IPA
+(iOS archives only),
+.Li PKG
+(Mac archives only), and
+.Li APP .
+If not specified,
+.Nm
+will attempt to auto-detect the format as either IPA or PKG.
+.\"
+.It Fl archivePath Ar xcarchivepath
+Specifies the path for the archive produced by the
+.Li archive
+action, or specifies the archive that should be exported when
+.Fl exportArchive
+is passed.
+.\"
+.It Fl exportPath Ar destinationpath
+Specifies the destination for the exported product, including the name of the exported file.
+.\"
+.It Fl exportProvisioningProfile Ar profilename
+Specifies the provisioning profile that should be used when exporting the archive.
+.\"
+.It Fl exportSigningIdentity Ar identityname
+Specifies the application signing identity that should be used when exporting the archive.  If possible, this may be inferred from
+.Fl exportProvisioningProfile .
+.\"
+.It Fl exportInstallerIdentity Ar identityname
+Specifies the installer signing identity that should be used when exporting the archive. If possible, this may be inferred from
+.Fl exportSigningIdentity
+or
+.Fl exportProvisioningProfile .
+.\"
+.It Fl exportWithOriginalSigningIdentity
+Specifies that the signing identity used to create the archive should be used when exporting the archive.
+.\"
+.It Ar buildaction No ...
+Specify a build action
+.Pq or actions
+to perform on the target. Available build actions are:
+.Bl -tag -width "installsrc"
+.It Li build
+Build the target in the build root 
+.Pq SYMROOT .
+This is the default build action.
+.It Li analyze
+Build and analyze a target or scheme from the build root
+.Pq SYMROOT .
+This requires specifying a scheme.
+.It Li archive
+Archive a scheme from the build root 
+.Pq SYMROOT .
+This requires specifying a scheme.
+.It Li test
+Test a scheme from the build root
+.Pq SYMROOT .
+This requires specifying a scheme and optionally a destination.
+.It Li installsrc
+Copy the source of the project to the source root
+.Pq SRCROOT .
+.It Li install
+Build the target and install it into the target's installation directory in the distribution root 
+.Pq DSTROOT .
+.It Li clean
+Remove build products and intermediate files from the build root 
+.Pq SYMROOT .
+.El
+.\"
+.It Fl xcconfig Ar filename
+Load the build settings defined in 
+.Ar filename
+when building all targets.  These settings will override all other settings, including settings passed individually on the command line.
+.\"
+.It Fl dry-run, Fl n
+Print the commands that would be executed, but do not execute them.
+.\"
+.It Fl skipUnavailableActions
+Skip build actions that cannot be performed instead of failing. This option is only honored if
+.Fl scheme
+is passed.
+.\"
+.It Ar setting Ns = Ns Ar value
+Set the build setting 
+.Ar setting
+to 
+.Ar value .
+.\"
+.It Ns - Ns Ar userdefault Ns = Ns Ar value
+Set the user default 
+.Ar default
+to 
+.Ar value .
+.\"
+.It Fl version
+Display version information for this install of Xcode. Does not initiate a build. When used in conjunction with
+.Fl sdk ,
+the version of the specified SDK is displayed, or all SDKs if
+.Fl sdk
+is given no argument.
+Additionally, a single line of the reported version information may be returned if 
+.Ar infoitem
+is specified.
+.\"
+.It Fl usage
+Displays usage information for 
+.Nm .
+.El
+.\"
+.Ss Destinations
+The
+.Fl destination
+option takes as its argument a
+.Em destination specifier
+describing the device (or devices) to use as a destination.
+A destination specifier is a single argument consisting of a set of comma-separated
+.Ar key Ns = Ns Ar value
+pairs.
+The
+.Fl destination
+option may be specified multiple times to cause
+.Nm
+to perform the specified action on multiple destinations.
+.Pp
+Destination specifiers may include the
+.Ar platform
+key to specify one of the supported destination platforms.
+There are additional keys which should be supplied depending on the platform of the device you are selecting.
+.Pp
+Some devices may take time to look up. The
+.Fl destination-timeout
+option can be used to specify the amount of time to wait before a device is considered unavailable.
+If unspecified, the default timeout is 30 seconds.
+.Pp
+Currently,
+.Nm
+supports these platforms:
+.Bl -tag -width "iOS Simulator"
+.It Li OS X
+The local Mac, referred to in the Xcode interface as
+.Em My Mac ,
+and which supports the following keys:
+.Bl -tag -width "name"
+.It Ar arch
+The architecture to use, either
+.Ar x86_64
+.Pq the default
+or
+.Ar i386 .
+.El
+.It Li iOS
+An iOS device, which supports the following keys:
+.Bl -tag -width "name"
+.It Ar name
+The name of the device to use.
+.It Ar id
+The identifier of the device to use, as shown in the Devices tab of the Xcode Organizer.
+.El
+.It Li iOS Simulator
+The iOS Simulator, which supports the following keys:
+.Bl -tag -width "name"
+.It Ar name
+The full name of device to simulate, as presented in Xcode's UI.
+.It Ar OS
+The version of iOS to simulate, such as
+.Ar 6.0 ,
+or the string
+.Ar latest
+.Pq the default
+to indicate the most recent version of iOS supported by this version of Xcode.
+.El
+.El
+.Pp
+Some actions (such as building) may be performed without an actual device present.
+To build against a platform generically instead of a specific device, the destination specifier may be prefixed with the optional string "generic/", indicating that the platform should be targeted generically.
+An example of a generic destination is the "iOS Device" destination displayed in Xcode's UI when no physical iOS device is present.
+.El
+.Pp
+.\"
+.Ss Exporting Archives
+The
+.Fl exportArchive
+option specifies that
+.Nm
+should export the archive specified by
+.Fl archivePath
+to the format specified by
+.Fl exportFormat .
+The exported product will be placed at the path specified by
+.Fl exportPath .
+Re-signing when exporting an archive is optional. The provisioning profile that should be embedded in the exported product can be specified by
+.Fl exportProvisioningProfile .
+In some cases, the application signing identity that should be used during the export can be determined from the provisioning profile. For cases where that is not possible (including when no provisioning profile is embedded in the exported product), an application signing identity can be specified with
+.Fl exportSigningIdentity .
+When exporting a Mac archive as
+.Li PKG ,
+an installer signing identity can be used to sign the exported package. This may be inferred from the application signing identity (for instance, if "Developer ID Application" is specified for the application signing identity, "Developer ID Installer" will automatically be inferred), but it can be explicitly specified using
+.Fl exportInstallerIdentity .
+.\"
+.Ss Environment Variables
+The following environment variables affect the execution of
+.Nm :
+.Bl -tag -width ".Ev CLICOLOR_FORCE"
+.It Ev XCODE_XCCONFIG_FILE
+Set to a path to a file, build settings in that file will be loaded and used when building all targets.  These settings will override all other settings, including settings passed individually on the command line, and those in the file passed with the
+.Fl xcconfig
+option.
+.El
+.Ss Exit Codes
+.Nm
+exits with codes defined by
+.Xr sysexits 3 .
+It will exit with
+.Sy EX_OK
+on success.  On failure, it will commonly exit with
+.Sy EX_USAGE
+if any options appear malformed,
+.Sy EX_NOINPUT
+if any input files cannot be found,
+.Sy EX_IOERR
+if any files cannot be read or written, and
+.Sy EX_SOFTWARE
+if the commands given to xcodebuild fail.  It may exit with other codes in less common scenarios.
+.Sh EXAMPLES
+.Bl -tag -width -indent
+.It Li "xcodebuild clean install"
+.Pp
+Cleans the build directory; then builds and installs the first target in the Xcode project in the directory from which
+.Nm
+was started.
+.Pp
+.\"
+.It Li "xcodebuild -target MyTarget OBJROOT=/Build/MyProj/Obj.root SYMROOT=/Build/MyProj/Sym.root"
+.Pp
+Builds the target 
+.Em MyTarget
+in the Xcode project in the directory from which
+.Nm
+was started, putting intermediate files in the directory
+.Ar /Build/MyProj/Obj.root
+and the products of the build in the directory
+.Ar /Build/MyProj/Sym.root .
+.\"
+.Pp
+.It Li "xcodebuild -sdk macosx10.6"
+.Pp
+Builds the Xcode project in the directory from which
+.Nm
+was started against the Mac OS X 10.6 SDK.  The canonical names of all available SDKs can be viewed using the
+.Fl showsdks
+option.
+.Pp
+.It Li "xcodebuild -workspace MyWorkspace.xcworkspace -scheme MyScheme"
+.Pp
+Builds the scheme
+.Ar MyScheme
+in the Xcode workspace
+.Ar MyWorkspace.xcworkspace .
+.Pp
+.It Li "xcodebuild -workspace MyWorkspace.xcworkspace -scheme MyScheme archive"
+.Pp
+Archives the scheme
+.Ar MyScheme
+in the Xcode workspace
+.Ar MyWorkspace.xcworkspace .
+.Pp
+.It Li "xcodebuild -workspace MyWorkspace.xcworkspace -scheme MyScheme -destination 'platform=OS X,arch=x86_64' test"
+.Pp
+Tests the scheme
+.Ar MyScheme    
+in the Xcode workspace
+.Ar MyWorkspace.xcworkspace
+using the destination described as
+.Ar "My Mac 64-bit"
+in Xcode.
+.Pp
+.It Li "xcodebuild -workspace MyWorkspace.xcworkspace -scheme MyScheme -destination 'platform=iOS Simulator,name=iPhone' -destination 'platform=iOS,name=My iPad' test"
+.Pp
+Tests the scheme
+.Ar MyScheme
+in the Xcode workspace
+.Ar MyWorkspace.xcworkspace
+using both the iOS Simulator configured as an iPhone and the the iOS device named
+.Ar "My iPad" .
+(Note that the shell requires arguments to be quoted or otherwise escaped if they contain spaces.)
+.Pp
+.It Li "xcodebuild -workspace MyWorkspace.xcworkspace -scheme MyScheme -destination generic/platform=iOS build"
+.Pp
+Builds the scheme
+.Ar MyScheme
+in the Xcode workspace
+.Ar MyWorkspace.xcworkspace
+using the generic
+.Ar iOS Device
+destination.
+.It Li "xcodebuild -exportArchive -exportFormat IPA -archivePath MyMobileApp.xcarchive -exportPath MyMobileApp.ipa -exportProvisioningProfile 'MyMobileApp Distribution Profile'"
+.Pp
+Exports the archive
+.Ar MyMobileApp.xcarchive
+as an IPA file to the path
+.Ar MyMobileApp.ipa
+using the provisioning profile
+.Ar "MyMobileApp Distribution Profile" .
+.Pp
+.It Li "xcodebuild -exportArchive -exportFormat APP -archivePath MyMacApp.xcarchive -exportPath MyMacApp.pkg -exportSigningIdentity 'Developer ID Application: My Team'"
+.Pp
+Exports the archive
+.Ar MyMacApp.xcarchive
+as a PKG file to the path
+.Ar MyMacApp.pkg
+using the application signing identity
+.Ar "Developer ID Application: My Team" .
+The installer signing identity
+.Ar "Developer ID Installer: My Team"
+is implicitly used to sign the exported package.
+.El
+.Sh SEE ALSO                \" Section Header - required - don't modify
+.Bl -tag -width 4n
+.Xr sysexits 3
+.El

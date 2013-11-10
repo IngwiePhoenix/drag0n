@@ -1,0 +1,107 @@
+.\"Modified from man(1) of FreeBSD, the NetBSD mdoc.template, and mdoc.samples.
+.\"See Also:
+.\"man mdoc.samples for a complete listing of options
+.\"man mdoc for the short list of editing options
+.\"/usr/share/misc/mdoc.template
+.Dd 2/1/06               \" DATE 
+.Dt dsymutil 1      \" Program name and manual section number 
+.Os Darwin
+.Sh NAME                 \" Section Header - required - don't modify 
+.Nm dsymutil
+.\" The following lines are read in generating the apropos(man -k) database. Use only key
+.\" words here as the database is built based on the words here and in the .ND line. 
+.\".Nm Other_name_for_same_program(),
+.\" Use .Nm macro to designate other names for the documented program.
+.Nd manipulate archived DWARF debug symbol files.
+.Sh SYNOPSIS             \" Section Header - required - don't modify
+.Nm
+.Op Fl -arch=ARCH        \" [--arch=PATH] 
+.Op Fl -out=path         \" [--out=path] 
+.Ar exe_path             \" Underlined argument - use .Ar anywhere to underline
+.Sh DESCRIPTION          \" Section Header - required - don't modify
+.Nm
+links the DWARF debug information found in the object files for an executable 
+.Ar exe_path
+by using debug symbols information contained in its symbol table.
+.Pp                      \" Inserts a space
+The following options are available:
+.Bl -tag -width -indent  \" Differs from above in tag removed 
+.It Fl -arch=ARCH
+Link DWARF debug information only for specified CPU architecture types. 
+Architectures may be specified by name or by number. 
+When using this option, an error will be returned if any architectures 
+can not be properly linked. 
+This option can be specified multiple times, once for each desired architecture. 
+All cpu architectures will be linked by default and any architectures
+that can't be properly linked will not cause 
+.Nm
+to return an error as long as at least one architecture was able to link 
+successfully.
+.Pp
+.It Fl h, -help
+Display the help documentation for this command.
+.It Fl f, -flat
+Produce a flat dSYM file. A '.dwarf' extension will be appended to the
+executable name unless the output file is specified using the -o option.
+.It Fl o\ path, -out=path       \"--out=path
+Specifies an alternate path to place the .dSYM bundle. The default dSYM
+bundle path is created by appending '.dSYM' to the executable name. 
+.Pp
+.It Fl -oso-prepend-path=path       \"--oso-prepend-path=path
+Specifies a path to prepend to all debug symbol object file paths. 
+.Pp
+.It Fl s, -symtab
+Dumps the symbol table found in executable or object file(s) and exits.
+.Pp
+.It Fl t\ n, -threads=n
+Specifies the maximum number (n) of simultaneous threads to use when linking
+multiple architectures.
+.Pp
+.It Fl v, -version
+Display the current version and build date of the
+.Nm
+binary.
+.Pp
+.It Fl -verbose
+Display verbose information when linking.
+.Pp
+.It Fl u, -update
+Update an existing dSYM file to contain the latest accelerator tables and
+other DWARF optimizations. This option will currently add the new .apple_names
+and .apple_types hashed accelerator tables.
+.Pp
+.It Fl -minimize
+When used when creating a dSYM file, this option will suppress the emission of
+the .debug_inlines, .debug_pubnames, and .debug_pubtypes sections since dsymutil
+currently has better equivalents: .apple_names and .apple_types.
+When used in conjunction with --update option, this option will cause redundant
+accelerator tables to be removed. 
+.Pp
+.El                      \" Ends the list
+.\" .Sh ENVIRONMENT      \" May not be needed
+.\" .Bl -tag -width "ENV_VAR_1" -indent \" ENV_VAR_1 is width of the string ENV_VAR_1
+.\" .It Ev ENV_VAR_1
+.\" Description of ENV_VAR_1
+.\" .It Ev ENV_VAR_2
+.\" Description of ENV_VAR_2
+.\" .El                      
+.\".Sh FILES                \" File used or created by the topic of the man page
+.\".Bl -tag -width "/Users/joeuser/Library/really_long_file_name" -compact
+.\".It Pa /usr/share/file_name
+.\"FILE_1 description
+.\".It Pa /Users/joeuser/Library/really_long_file_name
+.\"FILE_2 description
+.\".El                      \" Ends the list
+.\" .Sh DIAGNOSTICS       \" May not be needed
+.\" .Bl -diag
+.\" .It Diagnostic Tag
+.\" Diagnostic informtion here.
+.\" .It Diagnostic Tag
+.\" Diagnostic informtion here.
+.\" .El
+.Sh SEE ALSO 
+.\" List links in ascending order by section, alphabetically within a section.
+.\" Please do not reference files that do not exist without filing a bug report
+.Xr dwarfdump 1 
+.\" .Sh BUGS              \" Document known, unremedied bugs 
+.\" .Sh HISTORY           \" Document history if command behaves in a unique manner 
