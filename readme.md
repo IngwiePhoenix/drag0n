@@ -55,17 +55,25 @@ With a copy of drag0n, you get:
 - [Yii](http://yiiframework.com) 1.1.14
 - [Spyc](https://github.com/tekimaki/spyc) {Submodule}
 - [PHPLinq](http://phplinq.codeplex.com)
-- [GCC](http://hpc.sourceforge.net) 4.9
-	- included libgcc with headers
-- [Make](http://www.gnu.org/software/software.html) 3.82
+- Build environment stripped off Apple's Developer Tools. It has been de-Apple-ized and there shouldn't be a license conflict.
+- [ninja](https://github.com/martine/ninja) 1.4.0.git
+- re2c 0.13.6
+- [ccdv](https://github.com/IngwiePhoenix/ccdv-rmx) Latest
+- upx and ucl
 - [dylibbundler](http://macdylibbundler.sourceforge.net) 0.4.1
 - [Deskshell](https://github.com/sihorton/appjs-deskshell) 0.8, customized
-- Precompiled libcurl, libmcrypt, icu, tidy, libpng and GD dynamic libraries
+- Precompiled libcurl, libmcrypt, tidy, libpng and GD dynamic libraries
 - [CocoaDialog](https://github.com/mstratman/cocoadialog)
 - [wget](http://www.techtach.org/wget-prebuilt-binary-for-mac-osx-lion) 1.13
 - [phpws](https://github.com/Devristo/phpws) {Submodule}
 - [WebServerPHP](https://code.google.com/p/php-webserver)
 - [WingStyle](https://github.com/IngwiePhoenix/WingStyle) {Submodule}
+
+
+
+## Licenses
+
+I am currently working these out. Check the License folder for current stats. I...am just not very good with long, big, english texts, y'know? :/
 
 
 
@@ -93,6 +101,21 @@ With a copy of drag0n, you get:
 - Installs everything into the default locations (such as /usr/local).
 - Offers pre and post scripts for install, update, reinstall and remove to ensure that developers can do everything needed to fine tune a package.
 - Will soon also offer possibility to reboot the os and install things at boot time if needed (will use nvram and launchDaemons).
+- Acts as a perfect build environment for developers - and those not able to obtain a working copy of developer tools. (Currently, I have no OS-delivered tools but use the ones inside drag0n myself!)
+
+
+
+## Build environment?
+
+Absolutely. This package is not just an installer, it also includes a whole bunch of tools to compile and work with developer stuff. Such as Clang for compiling, with all the neccessary headers, Ninja and Make as build systems, upx to compress executables and ccdv to beautify build process. To use it, just call d0.build from System/bin - like so:
+
+    $ source /Applications/drag0n/ddrag0n.app/Contents/System/bin/d0.build
+
+However, you can also link to another place. Its just important that the bin folder is within your PATH as you call this script. A nicer solution is on the way. I just need to find a reliable way to re-launch the current shell with a new, overridden one. You can also use d0-config to get all the paths and add them to your .profile folder. And if you realy want to extract all of our goodness of build tools; then cp -r them:
+
+	$ sudo cp -rv /Applications/drag0n/drag0n.app/Contents/System/usr /usr
+	
+And the tools are permanent - you can then even erase drag0n.
 
 
 
@@ -121,21 +144,6 @@ As you can see; I am able to do quite a lot of new things. with PHP.
 __UPDATE__: Now we run on [@sihorton](http://github.com/sihorton)'s [Deskshell](http://github.com/sihorton/appjs-deskshell). It is the evolution of AppJS and defines the new standart in drag0n. I currently had to exclude the shell functionality in the terminal, but it'll return soon :)
 
 
-## A build environment within an app?
-
-Yup! Absolutely! If we have a package that comes as source code, or if you are compiling from source, you can just go ahead and use these tools. That said, you do not need to stick to Apple. Ok, we don't have some certain programs, but in the most cases you don't even need them. :)
-
-We will soon include the following set of build tools. Please note, all the current releases are "Debug releases". The offical release will have these stripped, but can be added by just installing a package to do that. Users will be granted the option of downloading a full (Debug+Release) bundle or just a Release bundle. The debug bundle adds additional tools and some re-written components.
-
-Build tools that will be included:
-
-- Ninja
-- Clang
-- GCC
-- G++
-- Make
-
-That basically makes up everything you need for building.
 
 
 ## You use Spyc, why not the actual module?

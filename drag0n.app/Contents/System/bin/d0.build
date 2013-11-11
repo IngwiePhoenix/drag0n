@@ -1,11 +1,12 @@
 #!/bin/bash
 # d0.build -- fire off a build environment.
+# To call it:
+# 	source $(which d0.build)
+# Alternatively you can add this to your aliases, or source it in during initialization in .profile
 
-# Tell the upcoming shell that we're here.
 export drag0n=true
 
 # Vars
-ME=$(dirname "$0")
 GREEN=$(tput setaf 2)
 RESET=$(tput sgr0)
 PREPEND_BIN=true
@@ -23,26 +24,31 @@ done
 
 # Export the vars
 if [ $PREPEND_BIN == true ]; then
-	export PATH=$($ME/d0-config --bin-path):$PATH
+	export PATH=$(d0-config --bin-path):$PATH
 else
-	export PATH=$PATH:$($ME/d0-config --bin-path)
+	export PATH=$PATH:$(d0-config --bin-path)
 fi
 if [ $PREPEND_LIB == true ]; then
-	export LIBRARY_PATH=$($ME/d0-config --lib-path):$LIBRARY_PATH
+	export LIBRARY_PATH=$(d0-config --lib-path):$LIBRARY_PATH
 else
-	export LIBRARY_PATH=$LIBRARY_PATH:$($ME/d0-config --lib-path)
+	export LIBRARY_PATH=$LIBRARY_PATH:$(d0-config --lib-path)
 fi
 if [ $PREPEND_INC == true ]; then
-	export INCLUDE_PATH=$($ME/d0-config --inc-path):$INCLUDE_PATH
+	export INCLUDE_PATH=$(d0-config --inc-path):$INCLUDE_PATH
 else
-	export INCLUDE_PATH=$INCLUDE_PATH:$($ME/d0-config --inc-path)
+	export INCLUDE_PATH=$INCLUDE_PATH:$(d0-config --inc-path)
 fi
+
+# Fix mac
+export DYLD_LIBRARY_PATH=$LIBRARY_PATH
+
+# generalize clang
+export CPATH=$INCLUDE_PATH
 
 # Create new PS1 and prefixing it with drag0n
 #SHELLOPTS=$(bash -lc 'echo $SHELLOPTS')
-export SHELLOPTS
+#export SHELLOPTS
 oPS1=$(bash -lc 'echo $PS1')
-export PS1="${GREEN}drag0n${RESET}|$oPS1"
+export PS1="drag0n|$oPS1"
 
-echo -e "${GREEN}--> Launching <${SHELL}> with changed environment. Please note, your .profile/.bashrc is not loaded, to avoid conflicts.${RESET}"
-$SHELL --noprofile --norc -l
+echo -e "${GREEN}--> Build environment loaded successfuly.${RESET}"
